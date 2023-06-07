@@ -1,16 +1,20 @@
 # projekt-przejsciowy-tensorflow-js
 
 # Instalacja
-* pobranie biblioteki przy użyciu komendy
+* Pobranie repozytorium przy użyciu komendy
 ```
 git clone https://github.com/maciejm2517/projekt-przejsciowy-tensorflow-js
 ```
-* zainstalowanie oprogramowania Node.js w wersji przynajmniej v18.16.0 (LTS): https://nodejs.org/en
+* Zainstalowanie oprogramowania Node.js w wersji przynajmniej v18.16.0 (LTS): https://nodejs.org/en
+* Przejście do folderu z projektem 
+```
+cd projekt-przejsciowy-tensorflow-js
+```
 * Instalacja wymaganych bibliotek znajdujących się w pliku package.json
 ```
 npm install
 ``` 
-* uruchomienie lokalnego serwera strony internetowej
+* Uruchomienie lokalnego serwera strony internetowej
 ```
 npm run start
 ``` 
