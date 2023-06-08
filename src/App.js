@@ -21,6 +21,9 @@ const App = () => {
         case 'object':
           component = await import('./ObjectDet');
           break;
+        case 'voice':
+          component = await import('./VoiceDet');
+          break;
         default:
           component = await import('./Help');
       }
@@ -50,6 +53,9 @@ const App = () => {
           </li>
           <li>
             <button onClick={() => handleNavigation('object')}>Object Detection</button>
+          </li>
+          <li>
+            <button onClick={() => handleNavigation('voice')}>Voice Detection</button>
           </li>
         </ul>
       </nav>
