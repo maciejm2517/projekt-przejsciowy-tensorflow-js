@@ -16,7 +16,7 @@ import thumbs_down from "./thumbs_down.png";
 import i_love_you from "./i_love_you.png";
 
 
-function AboutPage() {
+function Finger() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -173,4 +173,4 @@ function AboutPage() {
   );
 }
 
-export default AboutPage;
+export default Finger;

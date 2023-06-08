@@ -5,7 +5,7 @@ import Webcam from "react-webcam";
 import "./App.css";
 import { drawRect } from "./utilities_OD";
 
-function NewOD() {
+function ObjectDet() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -80,4 +80,4 @@ function NewOD() {
   );
 }
 
-export default NewOD;
+export default ObjectDet;

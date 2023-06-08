@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HomePage = () => {
+const Help = () => {
   return (
     <div>
       <h1>Choose the model you want to test</h1>
@@ -8,4 +8,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Help;

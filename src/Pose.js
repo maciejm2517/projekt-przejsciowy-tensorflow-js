@@ -5,7 +5,7 @@ import * as posenet from "@tensorflow-models/posenet";
 import Webcam from "react-webcam";
 import { drawKeypoints, drawSkeleton } from "./utilities_pose";
 
-function ContactPage() {
+function Pose() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [variable, setVariable] = useState('');
@@ -18,7 +18,7 @@ function ContactPage() {
     //
     setInterval(() => {
       detect(net);
-    }, 100);
+    }, 1000);
   };
 
   const detect = async (net) => {
@@ -125,4 +125,4 @@ function ContactPage() {
 }
 
 
-export default ContactPage;
+export default Pose;

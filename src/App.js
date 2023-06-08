@@ -9,20 +9,20 @@ const App = () => {
       let component;
 
       switch (currentPage) {
-        case 'home':
-          component = await import('./HomePage');
+        case 'help':
+          component = await import('./Help');
           break;
-        case 'about':
-          component = await import('./AboutPage');
+        case 'finger':
+          component = await import('./Finger');
           break;
-        case 'contact':
-          component = await import('./ContactPage');
+        case 'pose':
+          component = await import('./Pose');
           break;
-        case 'new':
-          component = await import('./NewOD');
+        case 'object':
+          component = await import('./ObjectDet');
           break;
         default:
-          component = await import('./HomePage');
+          component = await import('./Help');
       }
 
       setCurrentComponent(() => component.default);
@@ -40,16 +40,16 @@ const App = () => {
       <nav>
         <ul>
           <li>
-            <button onClick={() => handleNavigation('home')}>Help</button>
+            <button onClick={() => handleNavigation('help')}>Help</button>
           </li>
           <li>
-            <button onClick={() => handleNavigation('about')}>Finger Gesture Estimator</button>
+            <button onClick={() => handleNavigation('finger')}>Finger Gesture Estimator</button>
           </li>
           <li>
-            <button onClick={() => handleNavigation('contact')}>Pose Estimator</button>
+            <button onClick={() => handleNavigation('pose')}>Pose Estimator</button>
           </li>
           <li>
-            <button onClick={() => handleNavigation('new')}>Object Detection</button>
+            <button onClick={() => handleNavigation('object')}>Object Detection</button>
           </li>
         </ul>
       </nav>
