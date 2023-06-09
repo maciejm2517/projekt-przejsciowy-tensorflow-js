@@ -8,6 +8,8 @@ import { drawRect } from "./utilities_OD";
 function ObjectDet() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+  const [vector, setVector] = useState([]);
+
 
   const runCoco = async () => {
     const net = await cocossd.load();
@@ -16,7 +18,7 @@ function ObjectDet() {
       detect(net);
     }, 10);
   };
-
+  var old_text = '';
   const detect = async (net) => {
     if (
       typeof webcamRef.current !== "undefined" &&
@@ -36,18 +38,25 @@ function ObjectDet() {
       const obj = await net.detect(video);
 
       const ctx = canvasRef.current.getContext("2d");
-      drawRect(obj, ctx); 
+      drawRect(obj, ctx);
+
+      if (old_text != obj[0].class + '\n') {
+        old_text = obj[0].class + '\n';
+        setVector(vector => [...vector, old_text]);
+      }
+
+      console.log(vector)
     }
   };
 
-  useEffect(()=>{runCoco()},[]);
+  useEffect(() => { runCoco() }, []);
 
   return (
     <div className="NewOD">
       <header className="NewOD-header">
         <Webcam
           ref={webcamRef}
-          muted={true} 
+          muted={true}
           style={{
             position: "absolute",
             marginLeft: "auto",
@@ -76,7 +85,25 @@ function ObjectDet() {
           }}
         />
       </header>
+      <div>
+        <p
+          style={{
+            position: "absolute",
+            marginLeft: "auto",
+            marginRight: "auto",
+            left: 800,
+            bottom: 300,
+            right: 0,
+            textAlign: "center",
+            height: 100,
+          }}>{vector.map((value, index) => (
+            <li key={index}>{value}</li>
+          ))}
+        </p>
+      </div>
+
     </div>
+
   );
 }
 

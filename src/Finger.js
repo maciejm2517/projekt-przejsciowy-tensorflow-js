@@ -103,72 +103,72 @@ function Finger() {
 
   return (
     <div>
-    <div className="AboutPage">
-      <header className="AboutPage-header">
-        <Webcam
-          ref={webcamRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
-        />
-
-        <canvas
-          ref={canvasRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
-        />
-
-        {emoji !== null ? (
-          <img
-            src={images[emoji]}
+      <div className="AboutPage">
+        <header className="AboutPage-header">
+          <Webcam
+            ref={webcamRef}
             style={{
               position: "absolute",
               marginLeft: "auto",
               marginRight: "auto",
-              left: 800,
-              bottom: 150,
+              left: 0,
               right: 0,
               textAlign: "center",
-              height: 100,
+              zindex: 9,
+              width: 640,
+              height: 480,
             }}
           />
-        ) : (
-          ""
-        )}
 
-        
-      </header>
-    </div>
-    <div>
-    <p           
-    style={{
-      position: "absolute",
-      marginLeft: "auto",
-      marginRight: "auto",
-      left: 800,
-      bottom: 300,
-      right: 0,
-      textAlign: "center",
-      height: 100,
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: "absolute",
+              marginLeft: "auto",
+              marginRight: "auto",
+              left: 0,
+              right: 0,
+              textAlign: "center",
+              zindex: 9,
+              width: 640,
+              height: 480,
+            }}
+          />
+
+          {emoji !== null ? (
+            <img
+              src={images[emoji]}
+              style={{
+                position: "absolute",
+                marginLeft: "auto",
+                marginRight: "auto",
+                left: 800,
+                bottom: 150,
+                right: 0,
+                textAlign: "center",
+                height: 100,
+              }}
+            />
+          ) : (
+            ""
+          )}
+
+
+        </header>
+      </div>
+      <div>
+        <p
+          style={{
+            position: "absolute",
+            marginLeft: "auto",
+            marginRight: "auto",
+            left: 800,
+            bottom: 300,
+            right: 0,
+            textAlign: "center",
+            height: 100,
           }}>{variable}</p>
-    </div>
+      </div>
     </div>
   );
 }

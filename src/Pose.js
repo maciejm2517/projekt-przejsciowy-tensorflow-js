@@ -18,7 +18,7 @@ function Pose() {
     //
     setInterval(() => {
       detect(net);
-    }, 1000);
+    }, 100);
   };
 
   const detect = async (net) => {
@@ -36,7 +36,7 @@ function Pose() {
 
       const pose = await net.estimateSinglePose(video);
       console.log(pose);
-        
+
       console.log(pose.keypoints[1].position.y);
 
       if (pose.keypoints[1].position.y < pose.keypoints[10].position.y) {
@@ -107,18 +107,18 @@ function Pose() {
       </header>
 
       <div>
-    <p           
-    style={{
-      position: "absolute",
-      marginLeft: "auto",
-      marginRight: "auto",
-      left: 800,
-      bottom: 300,
-      right: 0,
-      textAlign: "center",
-      height: 100,
+        <p
+          style={{
+            position: "absolute",
+            marginLeft: "auto",
+            marginRight: "auto",
+            left: 800,
+            bottom: 300,
+            right: 0,
+            textAlign: "center",
+            height: 100,
           }}>{variable}</p>
-    </div>
+      </div>
     </div>
 
   );
