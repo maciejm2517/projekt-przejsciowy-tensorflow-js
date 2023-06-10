@@ -18,7 +18,7 @@ import * as tf from "@tensorflow/tfjs";
 // NEW MODEL
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
-import { drawMesh } from "./utilities";
+import { drawMesh } from "./utilities_facemark";
 
 function Facemark() {
   const webcamRef = useRef(null);

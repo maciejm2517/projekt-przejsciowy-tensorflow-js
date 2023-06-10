@@ -61,7 +61,7 @@ const App = () => {
             <button onClick={() => handleNavigation('voice')}>Voice Detection</button>
           </li>
           <li>
-            <button onClick={() => handleNavigation('face')}>Voice Detection</button>
+            <button onClick={() => handleNavigation('face')}>Face Landmark</button>
           </li>
         </ul>
       </nav>
