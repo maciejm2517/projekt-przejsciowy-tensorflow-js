@@ -24,6 +24,9 @@ const App = () => {
         case 'voice':
           component = await import('./VoiceDet');
           break;
+        case 'face':
+          component = await import('./Facemark');
+          break;
         default:
           component = await import('./Help');
       }
@@ -56,6 +59,9 @@ const App = () => {
           </li>
           <li>
             <button onClick={() => handleNavigation('voice')}>Voice Detection</button>
+          </li>
+          <li>
+            <button onClick={() => handleNavigation('face')}>Voice Detection</button>
           </li>
         </ul>
       </nav>
