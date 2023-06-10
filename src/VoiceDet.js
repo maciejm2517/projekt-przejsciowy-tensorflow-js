@@ -74,7 +74,7 @@ function VoiceDet() {
       model.listen(result => {
         console.log(result.spectrogram);
         setAction(labels[argMax(Object.values(result.scores))]);
-        setPicture(images[setAction]);
+   //     setPicture(images[setAction]);
       }, { includeSpectrogram: true, probabilityThreshold: 0.9 });
       setTimeout(() => {
         if (model.isListening()) {
