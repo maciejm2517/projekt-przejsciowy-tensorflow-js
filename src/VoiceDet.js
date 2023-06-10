@@ -59,7 +59,7 @@ function VoiceDet() {
     setModel(recognizer);
     setLabels(recognizer.wordLabels());
     console.log(model);
-    //console.log(recognizer);
+    console.log(recognizer);
   };
 
   useEffect(() => {

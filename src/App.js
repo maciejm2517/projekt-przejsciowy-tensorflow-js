@@ -27,6 +27,9 @@ const App = () => {
         case 'face':
           component = await import('./Facemark');
           break;
+          case 'body':
+          component = await import('./BodySegmentation');
+          break;
         default:
           component = await import('./Help');
       }
@@ -62,6 +65,9 @@ const App = () => {
           </li>
           <li>
             <button onClick={() => handleNavigation('face')}>Face Landmark</button>
+          </li>
+          <li>
+            <button onClick={() => handleNavigation('body')}>Body Segmentation</button>
           </li>
         </ul>
       </nav>
