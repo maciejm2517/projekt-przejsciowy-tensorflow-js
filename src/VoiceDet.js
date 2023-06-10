@@ -58,6 +58,8 @@ function VoiceDet() {
     console.log(recognizer.wordLabels());
     setModel(recognizer);
     setLabels(recognizer.wordLabels());
+    console.log(model);
+    //console.log(recognizer);
   };
 
   useEffect(() => {
@@ -70,11 +72,12 @@ function VoiceDet() {
 
   const recognizeCommands = async () => {
     console.log('Listening for commands');
+    console.log(model);
+
     if (model && !model.isListening()) {
       model.listen(result => {
         console.log(result.spectrogram);
         setAction(labels[argMax(Object.values(result.scores))]);
-   //     setPicture(images[setAction]);
       }, { includeSpectrogram: true, probabilityThreshold: 0.9 });
       setTimeout(() => {
         if (model.isListening()) {
@@ -127,9 +130,13 @@ function VoiceDet() {
       height: 512,
     }}
   />
-  {picture !== null ? (
+
+  <div>{action ? action : "No Action Detected"}</div>
+</header>
+<div>
+{picture !== null ? (
             <img
-              src={images[picture]}
+              src={images[action]}
               style={{
                 position: "absolute",
                 marginLeft: "auto",
@@ -144,9 +151,7 @@ function VoiceDet() {
           ) : (
             ""
           )}
-  <div>{action ? action : "No Action Detected"}</div>
-</header>
-
+</div>
 </div>
   );
 }
