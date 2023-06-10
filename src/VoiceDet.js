@@ -134,7 +134,6 @@ function VoiceDet() {
   <div>{action ? action : "No Action Detected"}</div>
 </header>
 <div>
-{picture !== null ? (
             <img
               src={images[action]}
               style={{
@@ -148,9 +147,7 @@ function VoiceDet() {
                 height: 100,
               }}
             />
-          ) : (
-            ""
-          )}
+
 </div>
 </div>
   );
