@@ -52,10 +52,10 @@ const App = () => {
             <button onClick={() => handleNavigation('help')}>Help</button>
           </li>
           <li>
-            <button onClick={() => handleNavigation('finger')}>Finger Gesture Estimator</button>
+            <button onClick={() => handleNavigation('finger')}>Finger Gesture Model</button>
           </li>
           <li>
-            <button onClick={() => handleNavigation('pose')}>Pose Estimator</button>
+            <button onClick={() => handleNavigation('pose')}>Pose Detection</button>
           </li>
           <li>
             <button onClick={() => handleNavigation('object')}>Object Detection</button>
@@ -64,7 +64,7 @@ const App = () => {
             <button onClick={() => handleNavigation('voice')}>Voice Detection</button>
           </li>
           <li>
-            <button onClick={() => handleNavigation('face')}>Face Landmark</button>
+            <button onClick={() => handleNavigation('face')}>Face Landmark Model</button>
           </li>
           <li>
             <button onClick={() => handleNavigation('body')}>Body Segmentation</button>
