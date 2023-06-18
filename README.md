@@ -11,6 +11,11 @@ git clone https://github.com/maciejm2517/projekt-przejsciowy-tensorflow-js
 cd projekt-przejsciowy-tensorflow-js
 ```
 
+* Instalacja wymaganych bibliotek znajdujących się w pliku package.json
+```
+npm install
+```
+
 * Dodanie linijki
 ```
 "browser": { "fs": false, "node-fetch": false, "string_decoder": false, "crypto": false },
@@ -21,10 +26,6 @@ w pliku
 ```
 w celu uruchomienia modułu rozpoznawania głosu
 
-* Instalacja wymaganych bibliotek znajdujących się w pliku package.json
-```
-npm install
-``` 
 * Uruchomienie lokalnego serwera strony internetowej
 ```
 npm run start
