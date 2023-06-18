@@ -50,7 +50,7 @@ function VoiceDet() {
                     down: down,
                     go: go,
                     stop: stop};
-
+//
   const loadModel = async () => {
     const recognizer = await speech.create("BROWSER_FFT");
     console.log('Model Loaded');
@@ -87,6 +87,8 @@ function VoiceDet() {
     }
   };
 
+
+  //
   useEffect(() => {
     const timer = setInterval(() => {
       recognizeCommands();
@@ -101,18 +103,6 @@ function VoiceDet() {
   }, []); // Empty dependency array to run it only once when the component mounts
 
   return (
-    /*
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div>{action ? action : "No Action Detected"}</div>
-      </header>
-    </div>
-    */
-
 <div className="NewVD">
 <header className="NewVD-header">
 
