@@ -30,3 +30,34 @@ w celu uruchomienia modułu rozpoznawania głosu
 ```
 npm run start
 ``` 
+
+# Installation
+* Downloading the repository using the command
+```
+git clone https://github.com/maciejm2517/projekt-przejsciowy-tensorflow-js
+```
+* Install Node.js v18.16.0 (LTS) at least: https://nodejs.org/en
+* Go to the project folder
+```
+cd transition-project-tensorflow-js
+```
+
+* Install required libraries from package.json
+```
+npm install
+```
+
+* Added a line
+```
+"browser": { "fs": false, "node-fetch": false, "string_decoder": false, "crypto": false },
+```
+in the file
+```
+/tensorflow-js-transition-project/node_modules/@tensorflow-models/speech-commands/package.json
+```
+to start the voice recognition module
+
+* Starting a local webserver
+```
+npm run start
+```
