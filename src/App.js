@@ -27,9 +27,12 @@ const App = () => {
         case 'face':
           component = await import('./Facemark');
           break;
-          case 'body':
+        case 'body':
           component = await import('./BodySegmentation');
           break;
+        case 'image':
+            component = await import('./ImgRec');
+            break;
         default:
           component = await import('./Help');
       }
@@ -65,6 +68,9 @@ const App = () => {
           </li>
           <li>
             <button onClick={() => handleNavigation('face')}>Face Landmark Model</button>
+          </li>
+          <li>
+            <button onClick={() => handleNavigation('image')}>Image Recognision Model</button>
           </li>
           <li>
             <button onClick={() => handleNavigation('body')}>Body Segmentation</button>
