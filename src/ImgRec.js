@@ -17,7 +17,8 @@ function ImgRec() {
   const fileInputRef = useRef()
 
   const MODEL_PATH='http://localhost:3004/model.json';
-  
+  const CLASSES = ['Nothing','A','B','C']
+  //http-server -p 3004 --cors 
 
   const loadModel = async () => {
     setIsModelLoading(true)
@@ -44,11 +45,13 @@ const uploadImage = (e) => {
 
 const identify = async () => {
     textInputRef.current.value = ''
-    let tensor=tf.browser.fromPixels(imageRef.current).toFloat().expandDims()
-    const results = await model.predict(tensor).data()
-    console.log(tensor)
+    let tensor=tf.browser.fromPixels(imageRef.current).resizeNearestNeighbor([300,300]).toFloat().expandDims()
+    let pred = await model.predict(tensor).data()
+    console.log(pred)
+    let arr = Array.from(pred)
     console.log(results)
-    setResults(results)
+    let i = arr.indexOf(Math.max(...arr));
+    setResults(CLASSES[i])
 }
 
 const handleOnChange = (e) => {
@@ -89,16 +92,10 @@ if (isModelLoading) {
                     <div className="imageHolder">
                         {imageURL && <img src={imageURL} alt="Upload Preview" crossOrigin="anonymous" ref={imageRef} />}
                     </div>
-                    {results.length > 0 && <div className='resultsHolder'>
-                        {results.map((result, index) => {
-                            return (
-                                <div className='result' key={result.className}>
-                                    <span className='name'>{result.className}</span>
-                                    <span className='confidence'>Confidence level: {(result.probability * 100).toFixed(2)}% {index === 0 && <span className='bestGuess'>Best Guess</span>}</span>
-                                </div>
-                            )
-                        })}
-                    </div>}
+                    <p className="pred">
+                        {results}
+                    </p>
+                    
                 </div>
                 {imageURL && <button className='button' onClick={identify}>Identify Image</button>}
             </div>
