@@ -44,7 +44,10 @@ const uploadImage = (e) => {
 
 const identify = async () => {
     textInputRef.current.value = ''
-    const results = await model.classify(imageRef.current)
+    let tensor=tf.browser.fromPixels(imageRef.current).toFloat().expandDims()
+    const results = await model.predict(tensor).data()
+    console.log(tensor)
+    console.log(results)
     setResults(results)
 }
 
