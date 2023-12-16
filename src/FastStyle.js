@@ -80,7 +80,7 @@ const identify = async () => {
     const ImageTensor = preprocess(imageRef.current);
     const ImageStyledTensor = preprocess(imageStyledRef.current);
     let result = model.execute([ImageTensor, ImageStyledTensor]);
-    let canvas = document.getElementById('cv');
+    let canvas = canvasRef.current;
     tf.browser.toPixels(tf.squeeze(result),canvas);
     console.log(result);
 }
@@ -163,7 +163,6 @@ if (isModelLoading) {
             <div>
                 <canvas
                 ref={canvasRef}
-                id="cv"
                 />
             </div>
 
