@@ -16,7 +16,7 @@ function ImgRec() {
   const textInputRef = useRef()
   const fileInputRef = useRef()
 
-  const MODEL_PATH='http://localhost:3004/model.json';
+  const MODEL_PATH='http://localhost:3004/img_rec/model.json';
   const CLASSES = ['Nothing','A','B','C']
   //http-server -p 3004 --cors 
 
@@ -24,6 +24,7 @@ function ImgRec() {
     setIsModelLoading(true)
     try {
         const model = await tf.loadLayersModel(MODEL_PATH);
+        console.log(model);
         model.summary();
         setModel(model)
         setIsModelLoading(false)
@@ -80,19 +81,19 @@ if (isModelLoading) {
 
 
   return (
-    <div className="NewOD">
-            <div className='inputHolder'>
+    <div>
+            <div>
                 <input type='file' accept='image/*' capture='camera' className='uploadInput' onChange={uploadImage} ref={fileInputRef} />
                 <button className='uploadImage' onClick={triggerUpload}>Upload Image</button>
                 <span className='or'>OR</span>
                 <input type="text" placeholder='Paster image URL' ref={textInputRef} onChange={handleOnChange} />
             </div>
-            <div className="mainWrapper">
-                <div className="mainContent">
-                    <div className="imageHolder">
+            <div>
+                <div>
+                    <div>
                         {imageURL && <img src={imageURL} alt="Upload Preview" crossOrigin="anonymous" ref={imageRef} />}
                     </div>
-                    <p className="pred">
+                    <p>
                         {results}
                     </p>
                     
@@ -101,10 +102,10 @@ if (isModelLoading) {
             </div>
             {history.length > 0 && <div className="recentPredictions">
                 <h2>Recent Images</h2>
-                <div className="recentImages">
+                <div>
                     {history.map((image, index) => {
                         return (
-                            <div className="recentPrediction" key={`${image}${index}`}>
+                            <div key={`${image}${index}`}>
                                 <img src={image} alt='Recent Prediction' onClick={() => setImageURL(image)} />
                             </div>
                         )

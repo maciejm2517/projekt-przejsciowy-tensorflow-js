@@ -40,11 +40,15 @@ function ObjectDet() {
       const ctx = canvasRef.current.getContext("2d");
       drawRect(obj, ctx);
 
-      if (old_text != obj[0].class + '\n') {
-        old_text = obj[0].class + '\n';
-        setVector(vector => [...vector, old_text]);
-      }
+    //   if(obj[0].class){
+    //     if (old_text != obj[0].class + '\n') {
+    //       old_text = obj[0].class + '\n';
+    //     }
+    // }
+    // old_text = obj[0].class + '\n';
+    // setVector(vector => [...vector, old_text]);
 
+//
       console.log(vector)
     }
   };
@@ -94,7 +98,7 @@ function ObjectDet() {
             left: 800,
             bottom: 300,
             right: 0,
-            textAlign: "center",
+            textAlign: "right",
             height: 100,
           }}>{vector.map((value, index) => (
             <li key={index}>{value}</li>

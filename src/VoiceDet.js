@@ -50,7 +50,7 @@ function VoiceDet() {
                     down: down,
                     go: go,
                     stop: stop};
-//
+
   const loadModel = async () => {
     const recognizer = await speech.create("BROWSER_FFT");
     console.log('Model Loaded');
@@ -87,8 +87,6 @@ function VoiceDet() {
     }
   };
 
-
-  //
   useEffect(() => {
     const timer = setInterval(() => {
       recognizeCommands();

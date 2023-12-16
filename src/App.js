@@ -15,9 +15,9 @@ const App = () => {
         case 'finger':
           component = await import('./Finger');
           break;
-        case 'pose':
-          component = await import('./Pose');
-          break;
+        // case 'pose':
+        //   component = await import('./Pose');
+        //   break;
         case 'object':
           component = await import('./ObjectDet');
           break;
@@ -27,12 +27,15 @@ const App = () => {
         case 'face':
           component = await import('./Facemark');
           break;
-        case 'body':
-          component = await import('./BodySegmentation');
-          break;
+        // case 'body':
+        //   component = await import('./BodySegmentation');
+        //   break;
         case 'image':
             component = await import('./ImgRec');
             break;
+        case 'fast_style':
+              component = await import('./FastStyle');
+              break;
         default:
           component = await import('./Help');
       }
@@ -57,9 +60,9 @@ const App = () => {
           <li>
             <button onClick={() => handleNavigation('finger')}>Finger Gesture Model</button>
           </li>
-          <li>
+          {/*<li>
             <button onClick={() => handleNavigation('pose')}>Pose Detection</button>
-          </li>
+          </li>*/}
           <li>
             <button onClick={() => handleNavigation('object')}>Object Detection</button>
           </li>
@@ -73,8 +76,12 @@ const App = () => {
             <button onClick={() => handleNavigation('image')}>Image Recognision Model</button>
           </li>
           <li>
-            <button onClick={() => handleNavigation('body')}>Body Segmentation</button>
+            <button onClick={() => handleNavigation('fast_style')}>Fast style Model</button>
           </li>
+          {/*
+          <li>
+            <button onClick={() => handleNavigation('body')}>Body Segmentation</button>
+          </li> */}
         </ul>
       </nav>
 
