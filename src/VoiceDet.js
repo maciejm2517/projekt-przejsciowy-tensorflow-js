@@ -87,18 +87,21 @@ function VoiceDet() {
     }
   };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      recognizeCommands();
-    }, 2000); // Execute recognizeCommands every 2 seconds
+  setInterval(recognizeCommands, 2000);
 
-    return () => {
-      clearInterval(timer); // Cleanup the timer when the component unmounts
-      if (model && model.isListening()) {
-        model.stopListening();
-      }
-    };
-  }, []); // Empty dependency array to run it only once when the component mounts
+
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     recognizeCommands();
+  //   }, 2000); // Execute recognizeCommands every 2 seconds
+
+  //   return () => {
+  //     clearInterval(timer); // Cleanup the timer when the component unmounts
+  //     if (model && model.isListening()) {
+  //       model.stopListening();
+  //     }
+  //   };//
+  // }, []); // Empty dependency array to run it only once when the component mounts
 
   return (
 <div className="NewVD">
