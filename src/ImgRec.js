@@ -16,7 +16,7 @@ function ImgRec() {
   const textInputRef = useRef()
   const fileInputRef = useRef()
 
-  const MODEL_PATH='http://localhost:3004/img_rec/model.json';
+  const MODEL_PATH='http://localhost:3004/model.json';
   const CLASSES = ['Nothing','A','B','C']
   //http-server -p 3004 --cors 
 
