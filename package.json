@@ -10,6 +10,7 @@
     "@tensorflow-models/posenet": "^2.2.2",
     "@tensorflow-models/speech-commands": "^0.5.1",
     "@tensorflow/tfjs": "^4.6.0",
+    "@tensorflow/tfjs-node": "^4.15.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
