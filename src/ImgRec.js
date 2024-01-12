@@ -8,7 +8,7 @@ import { drawRect } from "./utilities_OD";
 function ImgRec() {
   const [isModelLoading, setIsModelLoading] = useState(false)
   const [model, setModel] = useState(null)
-  const [imageURL, setImageURL] = useState(null);
+  const [image, setImage] = useState(null);
   const [results, setResults] = useState([])
   const [history, setHistory] = useState([])
 
@@ -34,20 +34,21 @@ function ImgRec() {
     }
 }
 
-const uploadImage = (e) => {
-    const { files } = e.target
+const uploadImage = (file) => {
+    const { files } = file.target
     if (files.length > 0) {
         const url = URL.createObjectURL(files[0])
-        setImageURL(url)
+        setImage(url)
     } else {
-        setImageURL(null)
+        setImage(null)
     }
 }
 
 const identify = async () => {
-    textInputRef.current.value = ''
+    console.time('Execution Time');
     let tensor=tf.browser.fromPixels(imageRef.current).resizeNearestNeighbor([300,300]).toFloat().expandDims()
     let pred = await model.predict(tensor).data()
+    console.timeEnd('Execution Time');
     console.log(pred)
     let arr = Array.from(pred)
     console.log(results)
@@ -55,9 +56,9 @@ const identify = async () => {
     setResults(CLASSES[i])
 }
 
-const handleOnChange = (e) => {
-    setImageURL(e.target.value)
-    setResults([])
+const imgUrlSet = (url) => {
+    setImage(url.target.value)
+    textInputRef.current.value = ''
 }
 
 const triggerUpload = () => {
@@ -68,11 +69,11 @@ useEffect(() => {
     loadModel()
 }, [])
 
-useEffect(() => {
-    if (imageURL) {
-        setHistory([imageURL, ...history])
-    }
-}, [imageURL])
+// useEffect(() => {
+//     if (image) {
+//         setHistory([image, ...history])
+//     }
+// }, [image])
 
 if (isModelLoading) {
     return <h2>Model Loading...</h2>
@@ -83,36 +84,23 @@ if (isModelLoading) {
   return (
     <div>
             <div>
-                <input type='file' accept='image/*' capture='camera' className='uploadInput' onChange={uploadImage} ref={fileInputRef} />
+                <input type='file' accept='.jpg' capture='camera' className='uploadInput' onChange={uploadImage} ref={fileInputRef} />
                 <button className='uploadImage' onClick={triggerUpload}>Upload Image</button>
                 <span className='or'>OR</span>
-                <input type="text" placeholder='Paster image URL' ref={textInputRef} onChange={handleOnChange} />
+                <input type="text" placeholder='Paster image URL' ref={textInputRef} onChange={imgUrlSet} />
             </div>
             <div>
                 <div>
                     <div>
-                        {imageURL && <img src={imageURL} alt="Upload Preview" crossOrigin="anonymous" ref={imageRef} />}
+                        {image && <img src={image} alt="Upload Preview" crossOrigin="anonymous" ref={imageRef} />}
                     </div>
                     <p>
                         {results}
                     </p>
                     
                 </div>
-                {imageURL && <button className='button' onClick={identify}>Identify Image</button>}
+                {image && <button className='button' onClick={identify}>Identify Image</button>}
             </div>
-            {history.length > 0 && <div className="recentPredictions">
-                <h2>Recent Images</h2>
-                <div>
-                    {history.map((image, index) => {
-                        return (
-                            <div key={`${image}${index}`}>
-                                <img src={image} alt='Recent Prediction' onClick={() => setImageURL(image)} />
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>}
-
     </div>
 
   );
