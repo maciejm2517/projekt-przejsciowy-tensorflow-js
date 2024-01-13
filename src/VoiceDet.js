@@ -87,7 +87,7 @@ function VoiceDet() {
     }
   };
 
-  setInterval(recognizeCommands, 2000);
+  //setInterval(recognizeCommands, 2000);
 
 
   // useEffect(() => {
@@ -102,8 +102,7 @@ function VoiceDet() {
   //     }
   //   };//
   // }, []); // Empty dependency array to run it only once when the component mounts
-
-  return (
+if(model) return (
 <div className="NewVD">
 <header className="NewVD-header">
 
@@ -122,7 +121,7 @@ function VoiceDet() {
     }}
   />
 
-  <div>{action ? action : "No Action Detected"}</div>
+  <div><button onClick={recognizeCommands}>Start</button>{action ? action : "No Action Detected"}</div>
 </header>
 <div>
             <img
