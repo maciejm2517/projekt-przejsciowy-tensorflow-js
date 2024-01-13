@@ -38,6 +38,9 @@ const App = () => {
         case 'fast_style':
           component = await import('./FastStyle');
           break;
+        case 'cam_rec':
+            component = await import('./cam_rec');
+            break;
         default:
           component = await import('./Help');
       }
@@ -85,6 +88,10 @@ const App = () => {
               <Col>
 
                 <Button onClick={() => handleNavigation('fast_style')}>Fast style Model</Button>
+              </Col>
+              <Col>
+
+                <Button onClick={() => handleNavigation('cam_rec')}>Object Detection - Gestures</Button>
               </Col>
 
         <Suspense fallback={<div>Loading...</div>}>
