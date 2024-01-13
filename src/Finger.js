@@ -1,4 +1,7 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useRef, useState, useEffect } from "react";
+import { Button, Container, Row, Col } from 'react-bootstrap';
+
 
 import * as tf from "@tensorflow/tfjs";
 import * as handpose from "@tensorflow-models/handpose";
@@ -102,21 +105,15 @@ function Finger() {
   useEffect(() => { runHandpose() }, []);
 
   return (
-    <div>
-      <div className="AboutPage">
-        <header className="AboutPage-header">
+    <Container>
+      <Row>
+        <Col>
           <Webcam
             ref={webcamRef}
             style={{
               position: "absolute",
-              marginLeft: "auto",
-              marginRight: "auto",
-              left: 0,
-              right: 0,
-              textAlign: "center",
-              zindex: 9,
-              width: 640,
-              height: 480,
+              zindex: 9
+
             }}
           />
 
@@ -124,52 +121,33 @@ function Finger() {
             ref={canvasRef}
             style={{
               position: "absolute",
-              marginLeft: "auto",
-              marginRight: "auto",
-              left: 0,
-              right: 0,
-              textAlign: "center",
-              zindex: 9,
-              width: 640,
-              height: 480,
+              zindex: 9
             }}
           />
 
+        </Col>
+        <Col>
           {emoji !== null ? (
             <img
               src={images[emoji]}
               style={{
-                position: "absolute",
-                marginLeft: "auto",
-                marginRight: "auto",
-                left: 800,
-                bottom: 150,
-                right: 0,
-                textAlign: "center",
-                height: 100,
+                width: "10%",
               }}
             />
           ) : (
-            ""
-          )}
+            true
+
+          )}         
+         <p>
+          {variable}
+        </p>
+
+        </Col>
+      </Row>
 
 
-        </header>
-      </div>
-      <div>
-        <p
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 800,
-            bottom: 300,
-            right: 0,
-            textAlign: "center",
-            height: 100,
-          }}>{variable}</p>
-      </div>
-    </div>
+    </Container>
+
   );
 }
 

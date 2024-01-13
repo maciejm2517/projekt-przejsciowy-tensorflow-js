@@ -9,9 +9,11 @@
 
 // Face Mesh - https://github.com/tensorflow/tfjs-models/tree/master/facemesh
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, Component } from "react";
 import "./App.css";
 import * as tf from "@tensorflow/tfjs";
+import { Button, Container, Row, Col} from 'react-bootstrap';
+
 // OLD MODEL
 //import * as facemesh from "@tensorflow-models/facemesh";
 
@@ -73,8 +75,9 @@ function Facemark() {
   useEffect(()=>{runFacemesh()}, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
+<Container>
+  <Row>
+<Col>
         <Webcam
           ref={webcamRef}
           style={{
@@ -89,7 +92,8 @@ function Facemark() {
             height: 480,
           }}
         />
-
+</Col>
+<Col>
         <canvas
           ref={canvasRef}
           style={{
@@ -104,8 +108,9 @@ function Facemark() {
             height: 480,
           }}
         />
-      </header>
-    </div>
+        </Col>
+        </Row>
+      </Container>
   );
 }
 
