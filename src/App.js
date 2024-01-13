@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Container, Row, Col} from 'react-bootstrap';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -31,11 +33,11 @@ const App = () => {
         //   component = await import('./BodySegmentation');
         //   break;
         case 'image':
-            component = await import('./ImgRec');
-            break;
+          component = await import('./ImgRec');
+          break;
         case 'fast_style':
-              component = await import('./FastStyle');
-              break;
+          component = await import('./FastStyle');
+          break;
         default:
           component = await import('./Help');
       }
@@ -51,44 +53,45 @@ const App = () => {
   };
 
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <button onClick={() => handleNavigation('help')}>Help</button>
-          </li>
-          <li>
-            <button onClick={() => handleNavigation('finger')}>Finger Gesture Model</button>
-          </li>
-          {/*<li>
-            <button onClick={() => handleNavigation('pose')}>Pose Detection</button>
-          </li>*/}
-          <li>
-            <button onClick={() => handleNavigation('object')}>Object Detection</button>
-          </li>
-          <li>
-            <button onClick={() => handleNavigation('voice')}>Voice Detection</button>
-          </li>
-          <li>
-            <button onClick={() => handleNavigation('face')}>Face Landmark Model</button>
-          </li>
-          <li>
-            <button onClick={() => handleNavigation('image')}>Image Recognision Model</button>
-          </li>
-          <li>
-            <button onClick={() => handleNavigation('fast_style')}>Fast style Model</button>
-          </li>
-          {/*
-          <li>
-            <button onClick={() => handleNavigation('body')}>Body Segmentation</button>
-          </li> */}
-        </ul>
-      </nav>
+  <Container>     
+   <Row>
 
-      <Suspense fallback={<div>Loading...</div>}>
-        {CurrentComponent && <CurrentComponent />}
-      </Suspense>
-    </div>
+              <Col>
+                <Button onClick={() => handleNavigation('help')}>Help</Button>
+              </Col>
+
+              <Col>
+                <Button onClick={() => handleNavigation('finger')}>Finger Gesture Model</Button>
+              </Col>
+
+
+              <Col>
+                <Button onClick={() => handleNavigation('object')}>Object Detection</Button>
+              </Col>
+
+
+              <Col>
+                <Button onClick={() => handleNavigation('voice')}>Voice Detection</Button>
+              </Col>
+
+              <Col>
+                <Button onClick={() => handleNavigation('face')}>Face Landmark Model</Button>
+              </Col>
+
+              <Col>
+                <Button onClick={() => handleNavigation('image')}>Image Recognision Model</Button>
+              </Col>
+
+              <Col>
+
+                <Button onClick={() => handleNavigation('fast_style')}>Fast style Model</Button>
+              </Col>
+
+        <Suspense fallback={<div>Loading...</div>}>
+          {CurrentComponent && <CurrentComponent />}
+        </Suspense>
+      </Row>
+      </Container>
   );
 };
 

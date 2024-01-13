@@ -36,7 +36,7 @@
     transform: rotate(360deg);
   }
 }
-button {
+/* button {
   border: none;
   color: black;
   padding: 15px 32px;
@@ -58,4 +58,4 @@ p{
   padding: 50px 40px;
   align-items: left;
 
-}
+} */
