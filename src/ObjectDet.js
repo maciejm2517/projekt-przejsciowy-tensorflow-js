@@ -12,7 +12,11 @@ function ObjectDet() {
 
 
   const runCoco = async () => {
+    console.time('Execution Time');
+
     const net = await cocossd.load();
+    console.timeEnd('Execution Time');
+
     console.log("Handpose model loaded.");
     setInterval(() => {
       detect(net);
@@ -34,8 +38,10 @@ function ObjectDet() {
 
       canvasRef.current.width = videoWidth;
       canvasRef.current.height = videoHeight;
+      console.time('Execution Time');
 
       const obj = await net.detect(video);
+      console.timeEnd('Execution Time');
 
       const ctx = canvasRef.current.getContext("2d");
       drawRect(obj, ctx);

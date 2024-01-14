@@ -29,7 +29,10 @@ function Finger() {
   const images = { thumbs_up: thumbs_up, victory: victory, i_love_you: i_love_you, thumbs_down: thumbs_down };
 
   const runHandpose = async () => {
+    console.time('Execution Time');
     const net = await handpose.load();
+    console.timeEnd('Execution Time');
+
     console.log("Handpose model loaded.");
     setInterval(() => {
       detect(net);
@@ -61,7 +64,9 @@ function Finger() {
           loveYouGesture,
           thumbsDownGesture,
         ]);
+        console.time('Execution Time');
         const gesture = await GE.estimate(hand[0].landmarks, 4);
+        console.timeEnd('Execution Time');
         if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
           console.log(gesture.gestures);
 

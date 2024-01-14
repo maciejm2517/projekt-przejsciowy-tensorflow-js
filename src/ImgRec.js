@@ -23,7 +23,9 @@ function ImgRec() {
   const loadModel = async () => {
     setIsModelLoading(true)
     try {
+        console.time('Execution Time');
         const model = await tf.loadLayersModel(MODEL_PATH);
+        console.timeEnd('Execution Time');
         console.log(model);
         model.summary();
         setModel(model)
