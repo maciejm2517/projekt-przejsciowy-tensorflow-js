@@ -4,6 +4,7 @@ import * as tf from "@tensorflow/tfjs";
 import Webcam from "react-webcam";
 import "./App.css";
 import { drawRect } from "./utilities_OD";
+import { Button, Col, Container, Form, Image, InputGroup, Row } from 'react-bootstrap';
 
 function FastStyle() {
   const [isModelLoading, setIsModelLoading] = useState(false)
@@ -72,6 +73,7 @@ const identify = async () => {
 
     function preprocess(imageData){
         let imageTensor=tf.browser.fromPixels(imageData).resizeNearestNeighbor([300,300]);
+
         const offset = tf.scalar(255.0);
         const normalized = tf.scalar(1.0).sub(imageTensor.div(offset));
         const batched=normalized.expandDims(0);
@@ -120,54 +122,87 @@ if (isModelLoading) {
 
 
   return (
-    <div>
-            <div>
-                <input type='file' accept='image/*' capture='camera' className='uploadInput' onChange={uploadImage} ref={fileInputRef} />
-                <button className='uploadImage' onClick={triggerUpload}>Upload Image</button>
-                <span className='or'>OR</span>
-                <input type="text" placeholder='Paster image URL' ref={textInputRef} onChange={handleOnChange} />
-            </div>
-            <div>
-                <input type='file' accept='image/*' capture='camera' className='uploadInput' onChange={uploadStyledImage} ref={fileStyledInputRef} />
-                <button className='uploadStyledImage' onClick={triggerStyledUpload}>Upload Styled Image</button>
-                <span className='or'>OR</span>
-                <input type="text" placeholder='Paster image URL' ref={textStyledInputRef} onChange={handleStyledOnChange} />
-            </div>
-            <div>
-                <div>
-                    <div>
-                        {imageURL && <img src={imageURL} alt="Upload Preview" crossOrigin="anonymous" ref={imageRef} />}
-                    </div>
+    // <div>
+    //         <div>
+    //             <input type='file' accept='image/*' capture='camera' className='uploadInput' onChange={uploadImage} ref={fileInputRef} />
+    //             <button className='uploadImage' onClick={triggerUpload}>Upload Image</button>
+    //             <span className='or'>OR</span>
+    //             <input type="text" placeholder='Paster image URL' ref={textInputRef} onChange={handleOnChange} />
+    //         </div>
+    //         <div>
+    //             <input type='file' accept='image/*' capture='camera' className='uploadInput' onChange={uploadStyledImage} ref={fileStyledInputRef} />
+    //             <button className='uploadStyledImage' onClick={triggerStyledUpload}>Upload Styled Image</button>
+    //             <span className='or'>OR</span>
+    //             <input type="text" placeholder='Paster image URL' ref={textStyledInputRef} onChange={handleStyledOnChange} />
+    //         </div>
+    //         <div>
+    //             <div>
+    //                 <div>
+    //                     {imageURL && <img src={imageURL} alt="Upload Preview" crossOrigin="anonymous" ref={imageRef} />}
+    //                 </div>
                     
-                </div>
-                <div>
-                    <div>
-                        {imageStyledURL && <img src={imageStyledURL} alt="Upload Preview" crossOrigin="anonymous" ref={imageStyledRef} />}
-                    </div>
+    //             </div>
+    //             <div>
+    //                 <div>
+    //                     {imageStyledURL && <img src={imageStyledURL} alt="Upload Preview" crossOrigin="anonymous" ref={imageStyledRef} />}
+    //                 </div>
                     
-                </div>
-                {imageURL && imageStyledURL && <button className='button' onClick={identify}>Identify Image</button>}
-            </div>
-            {/* {history.length > 0 && <div className="recentPredictions">
-                <h2>Recent Images</h2>
-                <div>
-                    {history.map((image, index) => {
-                        return (
-                            <div key={`${image}${index}`}>
-                                <img src={image} alt='Recent Prediction' onClick={() => setImageURL(image)} />
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>} */}
-            <div>
-                <canvas
-                ref={canvasRef}
-                />
-            </div>
+    //             </div>
+    //             {imageURL && imageStyledURL && <button className='button' onClick={identify}>Identify Image</button>}
+    //         </div>
+    //         {/* {history.length > 0 && <div className="recentPredictions">
+    //             <h2>Recent Images</h2>
+    //             <div>
+    //                 {history.map((image, index) => {
+    //                     return (
+    //                         <div key={`${image}${index}`}>
+    //                             <img src={image} alt='Recent Prediction' onClick={() => setImageURL(image)} />
+    //                         </div>
+    //                     )
+    //                 })}
+    //             </div>
+    //         </div>} */}
+    //         <div>
+    //             <canvas
+    //             ref={canvasRef}
+    //             />
+    //         </div>
 
-    </div>
+    // </div>
+    <Container>
+            <Row>
+                <Col>
+                    <input type='file' accept='.jpg' onChange={uploadImage} ref={fileInputRef} />
+                </Col>
+                <Col>
+                    <input type='file' accept='.jpg' onChange={uploadStyledImage} ref={fileStyledInputRef} />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                        {imageURL && <img src={imageURL} alt="Upload Preview" crossOrigin="anonymous" width="100%" ref={imageRef} />}
+                    
+                </Col>
+                <Col>
+                        {imageStyledURL && <img src={imageStyledURL} alt="Upload Preview" crossOrigin="anonymous" width="100%" ref={imageStyledRef} />}
+                    
+                </Col>
 
+            </Row>
+            <Row>
+                <Col>
+                {imageStyledURL && <button className='button' onClick={identify}>Style Image</button>}
+
+                </Col>
+            </Row>
+            <Row>
+            <Col>
+                    <canvas ref={canvasRef} width="100%"/>
+                    
+                </Col>
+            </Row>
+
+    </Container>
   );
 }
 

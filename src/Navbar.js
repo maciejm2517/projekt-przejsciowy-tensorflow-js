@@ -16,6 +16,8 @@ const Navigation = () => {
           <Nav.Link as={Link} to="/Facemark">Facemark</Nav.Link>
           <Nav.Link as={Link} to="/ImgRec">ImgRec</Nav.Link>
           <Nav.Link as={Link} to="/CamRec">CamRec</Nav.Link>
+          <Nav.Link as={Link} to="/FastStyle">FastStyle</Nav.Link>
+
         </Nav>
       </Navbar.Collapse>
     </Navbar>

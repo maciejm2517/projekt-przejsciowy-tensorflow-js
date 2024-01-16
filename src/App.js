@@ -12,6 +12,8 @@ import VoiceDet from './VoiceDet';
 import Facemark from './Facemark';
 import ImgRec from './ImgRec';
 import CamRec from './CamRec';
+import FastStyle from './FastStyle';
+
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
           <Route path="/Facemark" element={<Facemark/>} />
           <Route path="/ImgRec" element={<ImgRec/>} />
           <Route path="/CamRec" element={<CamRec/>} />
+          <Route path="/FastStyle" element={<FastStyle/>} />
+
         </Routes>
       </Container>
     </Router>
