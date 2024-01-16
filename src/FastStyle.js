@@ -172,19 +172,19 @@ if (isModelLoading) {
     <Container>
             <Row>
                 <Col>
-                    <input type='file' accept='.jpg' onChange={uploadImage} ref={fileInputRef} />
+                    <input type='file' accept='image/*' onChange={uploadImage} ref={fileInputRef} />
                 </Col>
                 <Col>
-                    <input type='file' accept='.jpg' onChange={uploadStyledImage} ref={fileStyledInputRef} />
+                    <input type='file' accept='image/*' onChange={uploadStyledImage} ref={fileStyledInputRef} />
                 </Col>
             </Row>
             <Row>
                 <Col>
-                        {imageURL && <img src={imageURL} alt="Upload Preview" crossOrigin="anonymous" width="100%" ref={imageRef} />}
+                        {imageURL && <img src={imageURL} alt="Upload Preview" crossOrigin="anonymous" width="300px" ref={imageRef} />}
                     
                 </Col>
                 <Col>
-                        {imageStyledURL && <img src={imageStyledURL} alt="Upload Preview" crossOrigin="anonymous" width="100%" ref={imageStyledRef} />}
+                        {imageStyledURL && <img src={imageStyledURL} alt="Upload Preview" crossOrigin="anonymous" width="300px" ref={imageStyledRef} />}
                     
                 </Col>
 
