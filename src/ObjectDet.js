@@ -43,8 +43,11 @@ function ObjectDet() {
       const obj = await net.detect(video);
       console.timeEnd('Execution Time');
 
+      if(canvasRef.current!=null){
+
       const ctx = canvasRef.current.getContext("2d");
       drawRect(obj, ctx);
+      }
 
     //   if(obj[0].class){
     //     if (old_text != obj[0].class + '\n') {

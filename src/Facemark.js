@@ -67,8 +67,11 @@ function Facemark() {
       console.log(face);
 
       // Get canvas context
+      if(canvasRef.current!=null){
+
       const ctx = canvasRef.current.getContext("2d");
       requestAnimationFrame(()=>{drawMesh(face, ctx)});
+      }
     }
   };
 

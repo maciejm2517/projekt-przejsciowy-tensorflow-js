@@ -8,7 +8,7 @@ import { nextFrame } from "@tensorflow/tfjs";
 import { drawRect } from "./utilities_cam_rec";
 import { Button, Container, Row, Col } from 'react-bootstrap';
 
-function App() {
+function CamRec() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -20,7 +20,7 @@ function App() {
     // Loop and detect hands
     setInterval(() => {
       detect(net);
-    }, 16.7);
+    }, 10);
   };
 
   const detect = async (net) => {
@@ -55,6 +55,8 @@ function App() {
       const scores = await obj[1].array()
 
       // Draw mesh
+      if(canvasRef.current!=null){
+
       const ctx = canvasRef.current.getContext("2d");
 
       // 5. TODO - Update drawing utility
@@ -66,6 +68,7 @@ function App() {
       tf.dispose(casted)
       tf.dispose(expanded)
       tf.dispose(obj)
+      }
 
     }
   };
@@ -75,32 +78,27 @@ function App() {
   return (
     <Container>
       <Row>
-        <Col>
+        <Col style={{ position: 'relative' }} xs={12} sm={12} md={10} lg={6} xl={6}>
           <Webcam
             ref={webcamRef}
-            muted={true}
-            style={{
-              position: "absolute",
-              zindex: 8,
-              width: 640,
-              height: 480,
-            }}
+            style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'top' }}
+
           />
 
           <canvas
             ref={canvasRef}
-            style={{
-              position: "absolute",
-              zindex: 8,
-              width: 640,
-              height: 480,
-            }}
+            style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'center'  }}
+
           />
         </Col>
+        <Col style={{ position: 'relative' }}>
+        
+
+      </Col>
       </Row>
 
     </Container>
   );
 }
 
-export default App;
+export default CamRec;

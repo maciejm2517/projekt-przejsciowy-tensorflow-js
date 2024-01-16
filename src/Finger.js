@@ -101,58 +101,83 @@ function Finger() {
           }
         }
       }
+      if(canvasRef.current!=null){
+        const ctx = canvasRef.current.getContext("2d");
+        drawHand(hand, ctx);
 
-      const ctx = canvasRef.current.getContext("2d");
-      drawHand(hand, ctx);
+      }
     }
   };
 
   useEffect(() => { runHandpose() }, []);
 
   return (
-    <Container>
+      // <Container>
+      //   <Row>
+      //   <Col style={{ position: 'relative' }}>
+      //     <Webcam
+      //       ref={webcamRef}
+      //       style={{ position: 'absolute', top: 0, left: 0, width:"100%" }}
+            
+      //     />
+      //     <canvas
+      //       ref={canvasRef}
+      //       style={{ position: 'absolute', top: 0, left: 0,width:"100%" }}
+      //     />
+
+      //   </Col>
+      //   <Col style={{ position: 'relative' }}>
+      //     {emoji !== null ? (
+      //       <img
+      //         src={images[emoji]}
+      //         style={{
+      //           width: "10%",
+      //         }}
+      //       />
+      //     ) : (
+      //       true
+
+      //     )}         
+      //    <p>
+      //     {variable}
+      //   </p>
+
+      //   </Col>
+      //   </Row>
+      // </Container>
+      <Container>
       <Row>
-        <Col>
-          <Webcam
-            ref={webcamRef}
-            style={{
-              position: "absolute",
-              zindex: 9
+      <Col style={{ position: 'relative' }} xs={10} sm={10} md={10} lg={6} xl={6}>
+        <Webcam
+          ref={webcamRef}
+          style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'top' }}
+          
+        />
+        <canvas
+          ref={canvasRef}
+          style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'center'  }}
+        />
 
+      </Col>
+      <Col style={{ position: 'relative' }} xs={2} sm={2} md={2} lg={6} xl={6}>
+        {emoji !== null ? (
+          <img
+            src={images[emoji]}
+            style={{
+              width: "30%",
             }}
           />
+        ) : (
+          true
 
-          <canvas
-            ref={canvasRef}
-            style={{
-              position: "absolute",
-              zindex: 9
-            }}
-          />
+        )}         
+       <p>
+        {variable}
+      </p>
 
-        </Col>
-        <Col>
-          {emoji !== null ? (
-            <img
-              src={images[emoji]}
-              style={{
-                width: "10%",
-              }}
-            />
-          ) : (
-            true
-
-          )}         
-         <p>
-          {variable}
-        </p>
-
-        </Col>
+      </Col>
       </Row>
-
-
     </Container>
-
   );
 }
 
