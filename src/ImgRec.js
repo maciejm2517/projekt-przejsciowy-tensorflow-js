@@ -1,9 +1,10 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, Component } from "react";
 import * as tf from "@tensorflow/tfjs";
 // import * as tfn from "@tensorflow/tfjs-node"
 import Webcam from "react-webcam";
 import "./App.css";
 import { drawRect } from "./utilities_OD";
+import { Button, Col, Container, Form, Image, InputGroup, Row } from 'react-bootstrap';
 
 function ImgRec() {
   const [isModelLoading, setIsModelLoading] = useState(false)
@@ -84,26 +85,60 @@ if (isModelLoading) {
 
 
   return (
-    <div>
-            <div>
-                <input type='file' accept='.jpg' capture='camera' className='uploadInput' onChange={uploadImage} ref={fileInputRef} />
-                <button className='uploadImage' onClick={triggerUpload}>Upload Image</button>
-                <span className='or'>OR</span>
-                <input type="text" placeholder='Paster image URL' ref={textInputRef} onChange={imgUrlSet} />
-            </div>
-            <div>
-                <div>
-                    <div>
-                        {image && <img src={image} alt="Upload Preview" crossOrigin="anonymous" ref={imageRef} />}
-                    </div>
-                    <p>
-                        {results}
-                    </p>
+    <Container>
+            <Row>
+                <Col>
+                    <input type='file' accept='.jpg' onChange={uploadImage} ref={fileInputRef} />
+                </Col>
+                <Col>
+                    <input type="text" placeholder='Paster image URL' ref={textInputRef} onChange={imgUrlSet} />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                        {image && <img src={image} alt="Upload Preview" crossOrigin="anonymous" width="50%" ref={imageRef} />}
                     
-                </div>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                        {results}
+                    
+                </Col>
+            </Row>
+            <Row>
+                <Col>
                 {image && <button className='button' onClick={identify}>Identify Image</button>}
-            </div>
-    </div>
+
+                </Col>
+            </Row>
+    </Container>
+
+        // <Container>
+        //     <Row>
+        //     <Col>
+        //     <Form.Group controlId="formFile" className="mb-3">
+        //     <Form.Label>Default file input example</Form.Label>
+        //     <Form.Control type="file" />
+        //     </Form.Group>
+        //         <input type='file' accept='.jpg' capture='camera' className='uploadInput' onChange={uploadImage} ref={fileInputRef} />
+        //         <Button className='uploadImage' onClick={triggerUpload}>Upload Image</Button>
+        //         <input type="text" placeholder='Paster image URL' ref={textInputRef} onChange={imgUrlSet} />
+        //     </Col>
+        //     <div>
+        //         <div>
+        //             <div>
+        //                 {image && <img src={image} alt="Upload Preview" crossOrigin="anonymous" ref={imageRef} />}
+        //             </div>
+        //             <p>
+        //                 {results}
+        //             </p>
+                    
+        //         </div>
+        //         {image && <button className='button' onClick={identify}>Identify Image</button>}
+        //     </div>
+        //     </Row>
+        // </Container>
 
   );
 }

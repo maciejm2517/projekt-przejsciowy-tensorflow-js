@@ -4,6 +4,7 @@ import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import "./App.css";
 import { drawRect } from "./utilities_OD";
+import { Button, Container, Row, Col} from 'react-bootstrap';
 
 function ObjectDet() {
   const webcamRef = useRef(null);
@@ -65,57 +66,28 @@ function ObjectDet() {
   useEffect(() => { runCoco() }, []);
 
   return (
-    <div className="NewOD">
-      <header className="NewOD-header">
-        <Webcam
-          ref={webcamRef}
-          muted={true}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
-        />
+    <Container>
+      <Row>
+        <Col style={{ position: 'relative' }} xs={12} sm={12} md={10} lg={6} xl={6}>
+          <Webcam
+            ref={webcamRef}
+            style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'top' }}
 
-        <canvas
-          ref={canvasRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 8,
-            width: 640,
-            height: 480,
-          }}
-        />
-      </header>
-      <div>
-        <p
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 800,
-            bottom: 300,
-            right: 0,
-            textAlign: "right",
-            height: 100,
-          }}>{vector.map((value, index) => (
-            <li key={index}>{value}</li>
-          ))}
-        </p>
-      </div>
+          />
 
-    </div>
+          <canvas
+            ref={canvasRef}
+            style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'center'  }}
+
+          />
+        </Col>
+        <Col style={{ position: 'relative' }}>
+        
+
+      </Col>
+      </Row>
+
+    </Container>
 
   );
 }

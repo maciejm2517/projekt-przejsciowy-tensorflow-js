@@ -78,42 +78,28 @@ function Facemark() {
   useEffect(()=>{runFacemesh()}, []);
 
   return (
-<Container>
-  <Row>
-<Col>
-        <Webcam
-          ref={webcamRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
-        />
-</Col>
-<Col>
-        <canvas
-          ref={canvasRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
-        />
+    <Container>
+      <Row>
+        <Col style={{ position: 'relative' }} xs={12} sm={12} md={10} lg={6} xl={6}>
+          <Webcam
+            ref={webcamRef}
+            style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'top' }}
+
+          />
+
+          <canvas
+            ref={canvasRef}
+            style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'center'  }}
+
+          />
         </Col>
-        </Row>
-      </Container>
+        <Col style={{ position: 'relative' }}>
+        
+
+      </Col>
+      </Row>
+
+    </Container>
   );
 }
 
