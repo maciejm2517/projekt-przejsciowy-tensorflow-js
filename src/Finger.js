@@ -9,14 +9,18 @@ import * as fp from "fingerpose";
 import Webcam from "react-webcam";
 import "./App.css";
 
-import { drawHand } from "./utilitiesHandpose";
 import { loveYouGesture } from "./LoveYou";
 import { thumbsDownGesture } from "./ThumbsDown";
 
-import victory from "./HP_imgs/victory.png";
-import thumbs_up from "./HP_imgs/thumbs_up.png";
-import thumbs_down from "./HP_imgs/thumbs_down.png";
-import i_love_you from "./HP_imgs/i_love_you.png";
+// import victory from "./HP_imgs/victory.png";
+// import thumbs_up from "./HP_imgs/thumbs_up.png";
+// import thumbs_down from "./HP_imgs/thumbs_down.png";
+// import i_love_you from "./HP_imgs/i_love_you.png";
+
+import victory from "./HP_imgs/victory_2.jpg";
+import thumbs_up from "./HP_imgs/thumbs_up_2.jpg";
+import thumbs_down from "./HP_imgs/thumbs_down_2.jpg";
+import i_love_you from "./HP_imgs/i_love_you_2.jpg";
 
 
 function Finger() {
@@ -39,6 +43,54 @@ function Finger() {
     }, 10);
   };
 
+  const fingers = {
+    thumb: [0, 1, 2, 3, 4],
+    index: [0, 5, 6, 7, 8],
+    middle: [0, 9, 10, 11, 12],
+    ring: [0, 13, 14, 15, 16],
+    pinky: [0, 17, 18, 19, 20],
+  };
+
+  const drawHand = (predictions, ctx) => {
+    if (predictions.length > 0) {
+      predictions.forEach((prediction) => {
+        const landmarks = prediction.landmarks;
+  
+        for (let j = 0; j < Object.keys(fingers).length; j++) {
+          let finger = Object.keys(fingers)[j];
+          for (let k = 0; k < fingers[finger].length - 1; k++) {
+            const firstJointIndex = fingers[finger][k];
+            const secondJointIndex = fingers[finger][k + 1];
+  
+            ctx.beginPath();
+            ctx.moveTo(
+              landmarks[firstJointIndex][0],
+              landmarks[firstJointIndex][1]
+            );
+            ctx.lineTo(
+              landmarks[secondJointIndex][0],
+              landmarks[secondJointIndex][1]
+            );
+            ctx.strokeStyle = "blue";
+            ctx.lineWidth = 4;
+            ctx.stroke();
+          }
+        }
+  
+        for (let i = 0; i < landmarks.length; i++) {
+          const x = landmarks[i][0];
+          const y = landmarks[i][1];
+          ctx.beginPath();
+          ctx.arc(x, y, 10, 0, 3 * Math.PI);
+  
+          ctx.fillStyle = 'red';
+          ctx.fill();
+        }
+      });
+    }
+  };
+  
+
   const detect = async (net) => {
     if (
       typeof webcamRef.current !== "undefined" &&
@@ -46,14 +98,14 @@ function Finger() {
       webcamRef.current.video.readyState === 4
     ) {
       const video = webcamRef.current.video;
-      const videoWidth = webcamRef.current.video.videoWidth;
-      const videoHeight = webcamRef.current.video.videoHeight;
+      const videoX = webcamRef.current.video.videoWidth;
+      const videoY = webcamRef.current.video.videoHeight;
 
-      webcamRef.current.video.width = videoWidth;
-      webcamRef.current.video.height = videoHeight;
+      webcamRef.current.video.width = videoX;
+      webcamRef.current.video.height = videoY;
 
-      canvasRef.current.width = videoWidth;
-      canvasRef.current.height = videoHeight;
+      canvasRef.current.width = videoX;
+      canvasRef.current.height = videoY;
 
       const hand = await net.estimateHands(video);
 
@@ -83,15 +135,15 @@ function Finger() {
             setVariable(myVariable);
           }
           if (gesture.gestures[maxConfidence].name === "thumbs_up") {
-            const myVariable = "thumbs_up";
+            const myVariable = "thumbs up";
             setVariable(myVariable);
           }
           if (gesture.gestures[maxConfidence].name === "i_love_you") {
-            const myVariable = "i_love_you";
+            const myVariable = "i love you";
             setVariable(myVariable);
           }
           if (gesture.gestures[maxConfidence].name === "thumbs_down") {
-            const myVariable = "thumbs_down";
+            const myVariable = "thumbs down";
             setVariable(myVariable);
           }
         }
@@ -109,7 +161,7 @@ function Finger() {
   return (
     <Container>
       <Row>
-        <Col style={{ position: 'relative' }} xs={10} sm={10} md={10} lg={6} xl={6}>
+        <Col style={{ position: 'relative' }} xs={8} sm={8} md={8} lg={6} xl={6}>
           <Webcam
             ref={webcamRef}
             style={{ position: 'absolute', top: 0, left: 0, width: "100%", objectPosition: 'top' }}
@@ -121,12 +173,12 @@ function Finger() {
           />
 
         </Col>
-        <Col style={{ position: 'relative' }} xs={2} sm={2} md={2} lg={6} xl={6}>
+        <Col style={{ position: 'relative' }} xs={4} sm={4} md={4} lg={6} xl={6}>
           {image !== null ? (
             <img
               src={images[image]}
               style={{
-                width: "30%",
+                width: "50%",
                 alt: {image}
               }}
             />
