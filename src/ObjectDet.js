@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useEffect } from "react";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import "./App.css";
 import { drawRect } from "./utilitiesOD";
-import { Container, Row, Col} from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 function ObjectDet() {
   const webcamRef = useRef(null);
@@ -16,12 +17,12 @@ function ObjectDet() {
     const net = await cocossd.load();
     console.timeEnd('Execution Time');
 
-    console.log("Handpose model loaded.");
+    console.log("Object detection model loaded.");
     setInterval(() => {
       detect(net);
     }, 10);
   };
-  let colorMap={};
+  let colorMap = {};
   const detect = async (net) => {
     if (
       typeof webcamRef.current !== "undefined" &&
@@ -42,10 +43,10 @@ function ObjectDet() {
       const obj = await net.detect(video);
       console.timeEnd('Execution Time');
 
-      if(canvasRef.current!=null){
+      if (canvasRef.current != null) {
 
-      const ctx = canvasRef.current.getContext("2d");
-      drawRect(obj, ctx, colorMap);
+        const ctx = canvasRef.current.getContext("2d");
+        drawRect(obj, ctx, colorMap);
       }
     }
   };
@@ -58,20 +59,20 @@ function ObjectDet() {
         <Col style={{ position: 'relative' }} xs={12} sm={12} md={10} lg={6} xl={6}>
           <Webcam
             ref={webcamRef}
-            style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'top' }}
+            style={{ position: 'absolute', top: 0, left: 0, width: "100%", objectPosition: 'top' }}
 
           />
 
           <canvas
             ref={canvasRef}
-            style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'center'  }}
+            style={{ position: 'absolute', top: 0, left: 0, width: "100%", objectPosition: 'center' }}
 
           />
         </Col>
         <Col style={{ position: 'relative' }}>
-        
 
-      </Col>
+
+        </Col>
       </Row>
 
     </Container>
