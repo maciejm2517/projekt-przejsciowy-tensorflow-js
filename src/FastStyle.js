@@ -56,8 +56,8 @@ function FastStyle() {
 
     const identify = async () => {
         function preprocess(imageData) {
-            let imageTensor = tf.browser.fromPixels(imageData).resizeNearestNeighbor([300, 300]);
-
+            console.log(imageData);
+            let imageTensor = tf.browser.fromPixels(imageData);
             const offset = tf.scalar(255.0);
             const normalized = tf.scalar(1.0).sub(imageTensor.div(offset));
             const batched = normalized.expandDims(0);
