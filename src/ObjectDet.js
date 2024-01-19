@@ -1,15 +1,13 @@
-import React, { useRef, useState, useEffect } from "react";
-import * as tf from "@tensorflow/tfjs";
+import React, { useRef, useEffect } from "react";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import "./App.css";
 import { drawRect } from "./utilities_OD";
-import { Button, Container, Row, Col} from 'react-bootstrap';
+import { Container, Row, Col} from 'react-bootstrap';
 
 function ObjectDet() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-  const [vector, setVector] = useState([]);
 
 
   const runCoco = async () => {
@@ -23,7 +21,7 @@ function ObjectDet() {
       detect(net);
     }, 10);
   };
-  var old_text = '';
+  let colorMap={};
   const detect = async (net) => {
     if (
       typeof webcamRef.current !== "undefined" &&
@@ -47,19 +45,8 @@ function ObjectDet() {
       if(canvasRef.current!=null){
 
       const ctx = canvasRef.current.getContext("2d");
-      drawRect(obj, ctx);
+      drawRect(obj, ctx, colorMap);
       }
-
-    //   if(obj[0].class){
-    //     if (old_text != obj[0].class + '\n') {
-    //       old_text = obj[0].class + '\n';
-    //     }
-    // }
-    // old_text = obj[0].class + '\n';
-    // setVector(vector => [...vector, old_text]);
-
-//
-      console.log(vector)
     }
   };
 
