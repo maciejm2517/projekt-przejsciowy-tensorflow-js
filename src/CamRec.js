@@ -78,7 +78,7 @@ function CamRec() {
   return (
     <Container>
       <Row>
-        <Col style={{ position: 'relative' }} xs={12} sm={12} md={10} lg={6} xl={6}>
+        <Col style={{ position: 'relative' }} xs={10} sm={10} md={10} lg={6} xl={6}>
           <Webcam
             ref={webcamRef}
             style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'top' }}

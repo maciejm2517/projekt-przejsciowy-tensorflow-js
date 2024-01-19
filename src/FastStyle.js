@@ -24,7 +24,7 @@ function FastStyle() {
   const textStyledInputRef = useRef()
   const fileStyledInputRef = useRef()
 
-  const MODEL_PATH='http://localhost:3004/fast_style/model.json';
+  const MODEL_PATH='http://192.168.1.15:3004/fast_style/model.json';
   const CLASSES = ['Nothing','A','B','C']
   //http-server -p 3004 --cors 
 

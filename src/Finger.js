@@ -1,29 +1,28 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useRef, useState, useEffect } from "react";
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
-
-import * as tf from "@tensorflow/tfjs";
 import * as handpose from "@tensorflow-models/handpose";
+import * as fp from "fingerpose";
+
 import Webcam from "react-webcam";
 import "./App.css";
-import { drawHand } from "./utilities";
 
+import { drawHand } from "./utilitiesHandpose";
 import { loveYouGesture } from "./LoveYou";
 import { thumbsDownGesture } from "./ThumbsDown";
 
-import * as fp from "fingerpose";
-import victory from "./victory.png";
-import thumbs_up from "./thumbs_up.png";
-import thumbs_down from "./thumbs_down.png";
-import i_love_you from "./i_love_you.png";
+import victory from "./HP_imgs/victory.png";
+import thumbs_up from "./HP_imgs/thumbs_up.png";
+import thumbs_down from "./HP_imgs/thumbs_down.png";
+import i_love_you from "./HP_imgs/i_love_you.png";
 
 
 function Finger() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const [emoji, setEmoji] = useState(null);
+  const [image, setImage] = useState(null);
   const [variable, setVariable] = useState('');
 
   const images = { thumbs_up: thumbs_up, victory: victory, i_love_you: i_love_you, thumbs_down: thumbs_down };
@@ -76,32 +75,27 @@ function Finger() {
           const maxConfidence = confidence.indexOf(
             Math.max.apply(null, confidence)
           );
-          // console.log(gesture.gestures[maxConfidence].name);
-          setEmoji(gesture.gestures[maxConfidence].name);
-          console.log(emoji);
+          setImage(gesture.gestures[maxConfidence].name);
+          console.log(image);
           if (gesture.gestures[maxConfidence].name === "victory") {
-            //window.location.reload(true)
             const myVariable = "victory";
             setVariable(myVariable);
           }
           if (gesture.gestures[maxConfidence].name === "thumbs_up") {
-            //window.location.reload(true)
             const myVariable = "thumbs_up";
             setVariable(myVariable);
           }
           if (gesture.gestures[maxConfidence].name === "i_love_you") {
-            //window.location.reload(true)
             const myVariable = "i_love_you";
             setVariable(myVariable);
           }
           if (gesture.gestures[maxConfidence].name === "thumbs_down") {
-            //window.location.reload(true)
             const myVariable = "thumbs_down";
             setVariable(myVariable);
           }
         }
       }
-      if(canvasRef.current!=null){
+      if (canvasRef.current != null) {
         const ctx = canvasRef.current.getContext("2d");
         drawHand(hand, ctx);
 
@@ -112,70 +106,38 @@ function Finger() {
   useEffect(() => { runHandpose() }, []);
 
   return (
-      // <Container>
-      //   <Row>
-      //   <Col style={{ position: 'relative' }}>
-      //     <Webcam
-      //       ref={webcamRef}
-      //       style={{ position: 'absolute', top: 0, left: 0, width:"100%" }}
-            
-      //     />
-      //     <canvas
-      //       ref={canvasRef}
-      //       style={{ position: 'absolute', top: 0, left: 0,width:"100%" }}
-      //     />
-
-      //   </Col>
-      //   <Col style={{ position: 'relative' }}>
-      //     {emoji !== null ? (
-      //       <img
-      //         src={images[emoji]}
-      //         style={{
-      //           width: "10%",
-      //         }}
-      //       />
-      //     ) : (
-      //       true
-
-      //     )}         
-      //    <p>
-      //     {variable}
-      //   </p>
-
-      //   </Col>
-      //   </Row>
-      // </Container>
-      <Container>
+    <Container>
       <Row>
-      <Col style={{ position: 'relative' }} xs={10} sm={10} md={10} lg={6} xl={6}>
-        <Webcam
-          ref={webcamRef}
-          style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'top' }}
-          
-        />
-        <canvas
-          ref={canvasRef}
-          style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'center'  }}
-        />
+        <Col style={{ position: 'relative' }} xs={10} sm={10} md={10} lg={6} xl={6}>
+          <Webcam
+            ref={webcamRef}
+            style={{ position: 'absolute', top: 0, left: 0, width: "100%", objectPosition: 'top' }}
 
-      </Col>
-      <Col style={{ position: 'relative' }} xs={2} sm={2} md={2} lg={6} xl={6}>
-        {emoji !== null ? (
-          <img
-            src={images[emoji]}
-            style={{
-              width: "30%",
-            }}
           />
-        ) : (
-          true
+          <canvas
+            ref={canvasRef}
+            style={{ position: 'absolute', top: 0, left: 0, width: "100%", objectPosition: 'center' }}
+          />
 
-        )}         
-       <p>
-        {variable}
-      </p>
+        </Col>
+        <Col style={{ position: 'relative' }} xs={2} sm={2} md={2} lg={6} xl={6}>
+          {image !== null ? (
+            <img
+              src={images[image]}
+              style={{
+                width: "30%",
+                alt: {image}
+              }}
+            />
+          ) : (
+            true
 
-      </Col>
+          )}
+          <p>
+            {variable}
+          </p>
+
+        </Col>
       </Row>
     </Container>
   );
