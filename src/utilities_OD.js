@@ -16,6 +16,7 @@ export const drawRect = (detections, ctx,colorMap) =>{
       ctx.fillStyle =  colorMap[text]
       ctx.fillText(text+" "+Math.round(score * 100) / 100, x, y);
       ctx.rect(x, y, width, height); 
+      ctx.lineWidth = 5;
       ctx.stroke();
     });
   }
