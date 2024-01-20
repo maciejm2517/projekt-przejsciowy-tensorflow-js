@@ -1,28 +1,8 @@
-import React, {useRef, useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useEffect, useState } from 'react';
 import * as tf from "@tensorflow/tfjs";
 import * as speech from "@tensorflow-models/speech-commands";
 
-import zero from "./VD_imgs/zero.png";
-import one from "./VD_imgs/number-one.png";
-import two from "./VD_imgs/number-2.png";
-import three from "./VD_imgs/number-3.png";
-import four from "./VD_imgs/number-four.png";
-import five from "./VD_imgs/number-5.png";
-import six from "./VD_imgs/six.png";
-import seven from "./VD_imgs/seven.png";
-import eight from "./VD_imgs/number-8.png";
-import nine from "./VD_imgs/number-9.png";
-import yes from "./VD_imgs/thumb-up.png";
-import no from "./VD_imgs/thumb-down.png";
-import left from "./VD_imgs/plain-arrow-left.png";
-import right from "./VD_imgs/plain-arrow-right.png";
-import up from "./VD_imgs/plain-arrow-up.png";
-import down from "./VD_imgs/plain-arrow-down.png";
-import go from "./VD_imgs/play-button.png";
-import stop from "./VD_imgs/stop-sign.png";
-
+// ... your existing code ...
 
 function VoiceDet() {
   const [model, setModel] = useState(null);
@@ -32,114 +12,103 @@ function VoiceDet() {
   const [picture, setPicture] = useState(null);
 
   const canvasRef = useRef(null);
-  const images = {  zero: zero,
-                    one: one,
-                    two: two,
-                    three: three,
-                    four: four,
-                    five: five,
-                    six: six,
-                    seven: seven,
-                    eight: eight,
-                    nine: nine,
-                    yes: yes,
-                    no: no,
-                    left: left,
-                    right: right,
-                    up: up,
-                    down: down,
-                    go: go,
-                    stop: stop};
+  const images = {
+    // ... your existing image paths ...
+  };
 
   const loadModel = async () => {
-    const recognizer = await speech.create("BROWSER_FFT");
-    console.log('Model Loaded');
+    // Load the model
+    const loadedModel = await tf.loadLayersModel('http://localhost:3004/voice_det/my_model.json');
+
+    // Load the labels separately
+    const labelsResponse = await fetch('http://localhost:3004/voice_det/exported_labels.json');
+    const loadedLabels = await labelsResponse.json();
+
+    // Create a new speech-commands recognizer
+    const recognizer = speech.create('BROWSER_FFT');
+    recognizer.model = loadedModel;
+
+    // Manually set the loaded labels
+    recognizer.wordLabels = () => loadedLabels;
+
+    // Ensure the model is loaded
     await recognizer.ensureModelLoaded();
-    console.log(recognizer.wordLabels());
+
     setModel(recognizer);
-    setLabels(recognizer.wordLabels());
-    console.log(model);
-    console.log(recognizer);
+    setLabels(loadedLabels);
+
+    console.log('Model and labels loaded:', loadedModel, loadedLabels);
   };
 
   useEffect(() => {
     loadModel();
   }, []);
 
-  function argMax(arr) {
-    return arr.map((x, i) => [x, i]).reduce((r, a) => (a[0] > r[0] ? a : r))[1];
-  }
-
-  const recognizeCommands = async () => {
-    console.log('Listening for commands');
-    console.log(model);
-
+  const startListening = async () => {
     if (model && !model.isListening()) {
-      model.listen(result => {
-        console.log(result.spectrogram);
-        setAction(labels[argMax(Object.values(result.scores))]);
-      }, { includeSpectrogram: true, probabilityThreshold: 0.9 });
-      setTimeout(() => {
-        if (model.isListening()) {
-          model.stopListening();
-        }
-      }, 10e3);
+      try {
+        // Check if the model has been loaded (truthy) and if it's not already listening
+        await transferRecognizer.listen(result => {
+          const words = transferRecognizer.wordLabels();
+          for (let i = 0; i < words.length; ++i) {
+            console.log(`score for word '${words[i]}' = ${result.scores[i]}`);
+          }
+        }, { probabilityThreshold: 0.75 });
+      } catch (error) {
+        console.error("Error starting listening:", error);
+      }
     }
   };
 
-  //setInterval(recognizeCommands, 2000);
+  const stopListening = () => {
+    if (model && model.isListening()) {
+      model.stopListening();
+    }
+  };
 
+  const argMax = arr => arr.map((x, i) => [x, i]).reduce((r, a) => (a[0] > r[0] ? a : r))[1];
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     recognizeCommands();
-  //   }, 2000); // Execute recognizeCommands every 2 seconds
+  return (
+    <div className="NewVD">
+      <header className="NewVD-header">
 
-  //   return () => {
-  //     clearInterval(timer); // Cleanup the timer when the component unmounts
-  //     if (model && model.isListening()) {
-  //       model.stopListening();
-  //     }
-  //   };//
-  // }, []); // Empty dependency array to run it only once when the component mounts
-if(model) return (
-<div className="NewVD">
-<header className="NewVD-header">
+        <canvas
+          ref={canvasRef}
+          style={{
+            position: "absolute",
+            marginLeft: "auto",
+            marginRight: "auto",
+            left: 0,
+            right: 0,
+            textAlign: "center",
+            zindex: 8,
+            width: 512,
+            height: 512,
+          }}
+        />
 
-  <canvas
-    ref={canvasRef}
-    style={{
-      position: "absolute",
-      marginLeft: "auto",
-      marginRight: "auto",
-      left: 0,
-      right: 0,
-      textAlign: "center",
-      zindex: 8,
-      width: 512,
-      height: 512,
-    }}
-  />
-
-  <div><button onClick={recognizeCommands}>Start</button>{action ? action : "No Action Detected"}</div>
-</header>
-<div>
-            <img
-              src={images[action]}
-              style={{
-                position: "absolute",
-                marginLeft: "auto",
-                marginRight: "auto",
-                left: 800,
-                bottom: 150,
-                right: 0,
-                textAlign: "center",
-                height: 100,
-              }}
-            />
-
-</div>
-</div>
+        <div>
+          <button onClick={startListening}>Start</button>
+          <button onClick={stopListening}>Stop</button>
+          {action ? action : "No Action Detected"}
+        </div>
+      </header>
+      <div>
+        <img
+          src={images[action]}
+          style={{
+            position: "absolute",
+            marginLeft: "auto",
+            marginRight: "auto",
+            left: 800,
+            bottom: 150,
+            right: 0,
+            textAlign: "center",
+            height: 100,
+          }}
+        />
+      </div>
+    </div>
   );
 }
 
