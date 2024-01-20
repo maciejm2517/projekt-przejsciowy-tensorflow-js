@@ -3,13 +3,35 @@ import React, { useRef, useEffect } from "react";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import "./App.css";
-import { drawRect } from "./utilitiesOD";
+
 import { Container, Row, Col } from 'react-bootstrap';
 
 function ObjectDet() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
+  const drawRect = (detections, ctx,colorMap) =>{
+    detections.forEach(prediction => {
+  
+      const [x, y, width, height] = prediction['bbox']; 
+      const text = prediction['class']; 
+      const score = prediction['score']; 
+
+      if (!colorMap[text]){
+        colorMap[text] = '#' + Math.floor(Math.random()*2**24).toString(16);
+      }
+
+      ctx.strokeStyle =  colorMap[text]
+      ctx.font = '20px Arial';
+      console.log(colorMap)
+      ctx.beginPath();   
+      ctx.fillStyle =  colorMap[text]
+      ctx.fillText(text+" "+Math.round(score * 100) / 100, x, y);
+      ctx.rect(x, y, width, height); 
+      ctx.lineWidth = 5;
+      ctx.stroke();
+    });
+  }
 
   const runCoco = async () => {
     console.time('Execution Time');

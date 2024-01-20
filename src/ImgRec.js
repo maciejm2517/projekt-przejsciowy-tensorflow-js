@@ -34,7 +34,7 @@ function ImgRec() {
     }
 
     const uploadImage = (file) => {
-        const files = file.target
+        const {files} = file.target
         if (files.length > 0) {
             const url = URL.createObjectURL(files[0])
             setImage(url)

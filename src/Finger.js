@@ -9,18 +9,18 @@ import * as fp from "fingerpose";
 import Webcam from "react-webcam";
 import "./App.css";
 
-import { loveYouGesture } from "./LoveYou";
-import { thumbsDownGesture } from "./ThumbsDown";
+import { loveYouGesture } from "./handGestures/LoveYou";
+import { thumbsDownGesture } from "./handGestures/ThumbsDown";
 
 // import victory from "./HP_imgs/victory.png";
 // import thumbs_up from "./HP_imgs/thumbs_up.png";
 // import thumbs_down from "./HP_imgs/thumbs_down.png";
 // import i_love_you from "./HP_imgs/i_love_you.png";
 
-import victory from "./HP_imgs/victory_2.jpg";
-import thumbs_up from "./HP_imgs/thumbs_up_2.jpg";
-import thumbs_down from "./HP_imgs/thumbs_down_2.jpg";
-import i_love_you from "./HP_imgs/i_love_you_2.jpg";
+import victory from "./handImgs/victory_2.jpg";
+import thumbs_up from "./handImgs/thumbs_up_2.jpg";
+import thumbs_down from "./handImgs/thumbs_down_2.jpg";
+import i_love_you from "./handImgs/i_love_you_2.jpg";
 
 
 function Finger() {
@@ -32,7 +32,7 @@ function Finger() {
 
   const images = { thumbs_up: thumbs_up, victory: victory, i_love_you: i_love_you, thumbs_down: thumbs_down };
 
-  const runHandpose = async () => {
+  const runHandPose = async () => {
     console.time('Execution Time');
     const net = await handpose.load();
     console.timeEnd('Execution Time');
@@ -51,7 +51,7 @@ function Finger() {
     pinky: [0, 17, 18, 19, 20],
   };
 
-  const drawHand = (predictions, ctx) => {
+  const showHandMarks = (predictions, ctx) => {
     if (predictions.length > 0) {
       predictions.forEach((prediction) => {
         const landmarks = prediction.landmarks;
@@ -150,13 +150,13 @@ function Finger() {
       }
       if (canvasRef.current != null) {
         const ctx = canvasRef.current.getContext("2d");
-        drawHand(hand, ctx);
+        showHandMarks(hand, ctx);
 
       }
     }
   };
 
-  useEffect(() => { runHandpose() }, []);
+  useEffect(() => { runHandPose() }, []);
 
   return (
     <Container>
