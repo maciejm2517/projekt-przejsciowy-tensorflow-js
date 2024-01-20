@@ -15,29 +15,33 @@ function VoiceDet() {
   const images = {
     // ... your existing image paths ...
   };
-
+  let myModel;
   const loadModel = async () => {
-    // Load the model
-    const loadedModel = await tf.loadLayersModel('http://localhost:3004/voice_det/my_model.json');
-
-    // Load the labels separately
-    const labelsResponse = await fetch('http://localhost:3004/voice_det/exported_labels.json');
-    const loadedLabels = await labelsResponse.json();
-
-    // Create a new speech-commands recognizer
-    const recognizer = speech.create('BROWSER_FFT');
-    recognizer.model = loadedModel;
-
-    // Manually set the loaded labels
-    recognizer.wordLabels = () => loadedLabels;
-
-    // Ensure the model is loaded
-    await recognizer.ensureModelLoaded();
-
-    setModel(recognizer);
-    setLabels(loadedLabels);
-
-    console.log('Model and labels loaded:', loadedModel, loadedLabels);
+    try {
+      // Load the pre-trained model
+      const baseRecognizer = speech.create('BROWSER_FFT');
+      await baseRecognizer.ensureModelLoaded();
+  
+      // Create a transfer learning model
+      myModel = baseRecognizer.createTransfer('polish');
+  
+      // Load the examples for transfer learning
+      const labelsResponse = await fetch('http://localhost:3004/voice_det/serialized_model.bin'); // Fetch the binary file directly
+      const polishExamples = await labelsResponse.arrayBuffer();
+      console.log(polishExamples);
+  
+      // Load examples for the "polish" transfer learning task
+      myModel.loadExamples(polishExamples);
+  
+      // Ensure the model is loaded
+      await myModel.ensureModelLoaded();
+  
+      //setModel(model);
+  
+      console.log('Model and examples loaded for transfer learning');
+    } catch (error) {
+      console.error('Error loading model:', error);
+    }
   };
 
   useEffect(() => {
@@ -45,11 +49,11 @@ function VoiceDet() {
   }, []);
 
   const startListening = async () => {
-    if (model && !model.isListening()) {
+    if (myModel && !myModel.isListening()) {
       try {
         // Check if the model has been loaded (truthy) and if it's not already listening
-        await transferRecognizer.listen(result => {
-          const words = transferRecognizer.wordLabels();
+        await myModel.listen(result => {
+          const words = myModel.wordLabels();
           for (let i = 0; i < words.length; ++i) {
             console.log(`score for word '${words[i]}' = ${result.scores[i]}`);
           }
@@ -61,8 +65,8 @@ function VoiceDet() {
   };
 
   const stopListening = () => {
-    if (model && model.isListening()) {
-      model.stopListening();
+    if (myModel && myModel.isListening()) {
+      myModel.stopListening();
     }
   };
 
