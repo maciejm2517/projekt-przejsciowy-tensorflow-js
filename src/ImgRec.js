@@ -45,7 +45,7 @@ function ImgRec() {
 
     const identify = async () => {
         console.time('Execution Time');
-        let tensor = tf.browser.fromPixels(imageRef.current).resizeNearestNeighbor([300, 300]).toFloat().expandDims()
+        let tensor = tf.browser.fromPixels(imageRef.current).resizeBilinear([300, 300]).toFloat().expandDims()
         let pred = await model.predict(tensor).data()
         console.timeEnd('Execution Time');
         console.log(pred)
