@@ -50,9 +50,9 @@ function CamRec() {
       const expanded = casted.expandDims(0)
       const obj = await net.executeAsync(expanded)
 
-      const boxes = await obj[5].array()
-      const classes = await obj[7].array()
-      const scores = await obj[1].array()
+      const boxes = await obj[1].array()
+      const classes = await obj[0].array()
+      const scores = await obj[3].array()
 
       // Draw mesh
       if(canvasRef.current!=null){
