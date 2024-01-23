@@ -3,7 +3,24 @@ import * as tf from "@tensorflow/tfjs";
 import * as speech from "@tensorflow-models/speech-commands";
 
 // ... your existing code ...
-
+import zero from "./VD_imgs/zero.png";
+import one from "./VD_imgs/number-one.png";
+import two from "./VD_imgs/number-2.png";
+import three from "./VD_imgs/number-3.png";
+import four from "./VD_imgs/number-four.png";
+import five from "./VD_imgs/number-5.png";
+import six from "./VD_imgs/six.png";
+import seven from "./VD_imgs/seven.png";
+import eight from "./VD_imgs/number-8.png";
+import nine from "./VD_imgs/number-9.png";
+import yes from "./VD_imgs/thumb-up.png";
+import no from "./VD_imgs/thumb-down.png";
+import left from "./VD_imgs/plain-arrow-left.png";
+import right from "./VD_imgs/plain-arrow-right.png";
+import up from "./VD_imgs/plain-arrow-up.png";
+import down from "./VD_imgs/plain-arrow-down.png";
+import go from "./VD_imgs/play-button.png";
+import stop from "./VD_imgs/stop-sign.png";
 function VoiceDet() {
   const [model, setModel] = useState(null);
   const [action, setAction] = useState(null);
@@ -12,9 +29,48 @@ function VoiceDet() {
   const [picture, setPicture] = useState(null);
 
   const canvasRef = useRef(null);
-  const images = {
-    // ... your existing image paths ...
-  };
+  const images = {  zero: zero,
+    one: one,
+    two: two,
+    three: three,
+    four: four,
+    five: five,
+    six: six,
+    seven: seven,
+    eight: eight,
+    nine: nine,
+    yes: yes,
+    no: no,
+    left: left,
+    right: right,
+    up: up,
+    down: down,
+    go: go,
+    stop: stop};
+  const labels_xd = {  
+    0:"_background_noise_",
+    1:"cztery",
+    2:"dol",
+    3:"dwa",
+    4:"dziewiec",
+    5:"gora",
+    6:"jeden",
+    7: "lewo",
+    8:"moze",
+    9:"nie",
+    10:"osiem",
+    11:"piec",
+    12:"prawo",
+    13:"siedem",
+    14:"start",
+    15:"stop",
+    16:"szesc",
+    17:"tak",
+    18:"trzy",
+    19:"zero"
+};
+
+
   let myModel;
   const loadModel = async () => {
     try {
@@ -54,10 +110,12 @@ function VoiceDet() {
         // Check if the model has been loaded (truthy) and if it's not already listening
         await myModel.listen(result => {
           const words = myModel.wordLabels();
+          //console.log(words)
           for (let i = 0; i < words.length; ++i) {
-            console.log(`score for word '${words[i]}' = ${result.scores[i]}`);
+            //console.log(`score for word '${words[i]}' = ${result.scores[i]}`);
+            console.log(labels_xd[result.scores.indexOf(Math.max(...result.scores))])
           }
-        }, { probabilityThreshold: 0.75 });
+        }, { probabilityThreshold: 0.9 });
       } catch (error) {
         console.error("Error starting listening:", error);
       }
@@ -99,7 +157,7 @@ function VoiceDet() {
       </header>
       <div>
         <img
-          src={images[action]}
+          src={images[argMax]}
           style={{
             position: "absolute",
             marginLeft: "auto",
