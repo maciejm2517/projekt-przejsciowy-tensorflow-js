@@ -88,7 +88,15 @@ function VoiceDet() {
   
       // Load examples for the "polish" transfer learning task
       myModel.loadExamples(polishExamples,false);
-  
+      
+      await myModel.train({
+        epochs: 25,
+        callback: {
+          onEpochEnd: async (epoch, logs) => {
+            console.log(`Epoch ${epoch}: loss=${logs.loss}, accuracy=${logs.acc}`);
+          }
+        }
+      });
       // Ensure the model is loaded
       await myModel.ensureModelLoaded();
   
@@ -106,8 +114,10 @@ function VoiceDet() {
 
   const startListening = async () => {
     if (myModel && !myModel.isListening()) {
+      console.log('pressed')
       try {
         // Check if the model has been loaded (truthy) and if it's not already listening
+        console.log("listening")
         await myModel.listen(result => {
           const words = myModel.wordLabels();
           //console.log(words)
@@ -115,7 +125,7 @@ function VoiceDet() {
             //console.log(`score for word '${words[i]}' = ${result.scores[i]}`);
             console.log(labels_xd[result.scores.indexOf(Math.max(...result.scores))])
           }
-        }, { probabilityThreshold: 0.9 });
+        }, { probabilityThreshold: 0.7 });
       } catch (error) {
         console.error("Error starting listening:", error);
       }
