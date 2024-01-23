@@ -24,7 +24,11 @@ function FastStyle() {
     const loadModel = async () => {
         setIsModelLoading(true)
         try {
+            console.time('Execution Time');
+
             const model = await tf.loadGraphModel(MODEL_PATH);
+            console.timeEnd('Execution Time');
+
             console.log(model);
             setModel(model)
             setIsModelLoading(false)
@@ -65,7 +69,11 @@ function FastStyle() {
         }
         const ImageTensor = preprocess(imageRef.current);
         const ImageStyledTensor = preprocess(imageStyledRef.current);
+        console.time('Execution Time');
+
         let result = model.execute([ImageTensor, ImageStyledTensor]);
+        console.timeEnd('Execution Time');
+
         let canvas = canvasRef.current;
         tf.browser.toPixels(tf.squeeze(result), canvas);
         console.log(result);

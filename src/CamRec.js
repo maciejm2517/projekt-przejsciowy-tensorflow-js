@@ -15,7 +15,11 @@ function CamRec() {
   // Main function
   const runCoco = async () => {
     // 3. TODO - Load network 
+    console.time('Execution Time');
+
     const net = await tf.loadGraphModel('http://localhost:3004/cam_rec/model.json')
+    console.timeEnd('Execution Time');
+
     //console.log("detecting");
     // Loop and detect hands
     setInterval(() => {
@@ -48,7 +52,10 @@ function CamRec() {
       const resized = tf.image.resizeBilinear(img, [640, 480])
       const casted = resized.cast('int32')
       const expanded = casted.expandDims(0)
+      console.time('Execution Time');
+
       const obj = await net.executeAsync(expanded)
+      console.timeEnd('Execution Time');
 
       const boxes = await obj[1].array()
       const classes = await obj[0].array()
