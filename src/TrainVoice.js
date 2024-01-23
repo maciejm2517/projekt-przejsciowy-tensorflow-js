@@ -90,7 +90,7 @@ function VoiceDet() {
       myModel.loadExamples(polishExamples,false);
       
       await myModel.train({
-        epochs: 3,
+        epochs: 10,
         callback: {
           onEpochEnd: async (epoch, logs) => {
             console.log(`Epoch ${epoch}: loss=${logs.loss}, accuracy=${logs.acc}`);

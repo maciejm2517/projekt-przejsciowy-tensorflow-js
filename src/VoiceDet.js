@@ -51,11 +51,34 @@ function VoiceDet() {
                     go: go,
                     stop: stop};
 
+                    const labels_xd = {  
+                      0:"_background_noise_",
+                      1:"cztery",
+                      2:"dol",
+                      3:"dwa",
+                      4:"dziewiec",
+                      5:"gora",
+                      6:"jeden",
+                      7: "lewo",
+                      8:"moze",
+                      9:"nie",
+                      10:"osiem",
+                      11:"piec",
+                      12:"prawo",
+                      13:"siedem",
+                      14:"start",
+                      15:"stop",  
+                      16:"szesc",
+                      17:"tak",
+                      18:"trzy",
+                      19:"zero"
+                  };
+                  
+
   const loadModel = async () => {
-    const recognizer = 
-    await speech.create('BROWSER_FFT', null, 
+    const recognizer = await speech.create('BROWSER_FFT', null, 
                           'http://localhost:3004/voice_det/my-model.json', 
-                          'http://localhost:3004/voice_det/metadata.json');     
+                          'http://localhost:3004/voice_det/metadata1.json');     
     console.log('Model Loaded');
     await recognizer.ensureModelLoaded();
     console.log(recognizer.wordLabels());
@@ -81,7 +104,7 @@ function VoiceDet() {
       model.listen(result => {
         console.log(result.spectrogram);
         setAction(labels[argMax(Object.values(result.scores))]);
-      }, { includeSpectrogram: true, probabilityThreshold: 0.9 });
+      }, { includeSpectrogram: true, probabilityThreshold: 0.7 });
       setTimeout(() => {
         if (model.isListening()) {
           model.stopListening();
