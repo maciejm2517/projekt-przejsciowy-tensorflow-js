@@ -82,7 +82,7 @@ function VoiceDet() {
       myModel = baseRecognizer.createTransfer('polish');
   
       // Load the examples for transfer learning
-      const labelsResponse = await fetch('http://localhost:3004/voice_det/2024-01-23T12.58.08.bin'); // Fetch the binary file directly
+      const labelsResponse = await fetch('http://localhost:3004/voice_det/serialized_model.bin'); // Fetch the binary file directly
       const polishExamples = await labelsResponse.arrayBuffer();
       console.log(polishExamples);
   
@@ -90,13 +90,15 @@ function VoiceDet() {
       myModel.loadExamples(polishExamples,false);
       
       await myModel.train({
-        epochs: 25,
+        epochs: 1,
         callback: {
           onEpochEnd: async (epoch, logs) => {
             console.log(`Epoch ${epoch}: loss=${logs.loss}, accuracy=${logs.acc}`);
           }
         }
       });
+      await myModel.save('downloads://my-model');
+
       // Ensure the model is loaded
       await myModel.ensureModelLoaded();
   
