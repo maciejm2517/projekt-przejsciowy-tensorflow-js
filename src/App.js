@@ -13,6 +13,8 @@ import Facemark from './Facemark';
 import ImgRec from './ImgRec';
 import CamRec from './CamRec';
 import FastStyle from './FastStyle';
+import TrainVoice from './TrainVoice';
+
 
 
 const App = () => {
@@ -29,6 +31,8 @@ const App = () => {
           <Route path="/ImgRec" element={<ImgRec/>} />
           <Route path="/CamRec" element={<CamRec/>} />
           <Route path="/FastStyle" element={<FastStyle/>} />
+          <Route path="/TrainVoice" element={<TrainVoice/>} />
+
 
         </Routes>
       </Container>
