@@ -63,7 +63,7 @@ function VoiceDet() {
     12:"prawo",
     13:"siedem",
     14:"start",
-    15:"stop",
+    15:"stop",  
     16:"szesc",
     17:"tak",
     18:"trzy",
@@ -87,7 +87,7 @@ function VoiceDet() {
       console.log(polishExamples);
   
       // Load examples for the "polish" transfer learning task
-      myModel.loadExamples(polishExamples);
+      myModel.loadExamples(polishExamples,false);
   
       // Ensure the model is loaded
       await myModel.ensureModelLoaded();
