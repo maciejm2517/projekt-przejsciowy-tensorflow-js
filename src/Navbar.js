@@ -10,14 +10,14 @@ const Navigation = () => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/Help">Help</Nav.Link>
-          <Nav.Link as={Link} to="/Finger">Finger</Nav.Link>
-          <Nav.Link as={Link} to="/ObjectDet">ObjectDet</Nav.Link>
-          <Nav.Link as={Link} to="/VoiceDet">VoiceDet</Nav.Link>
-          <Nav.Link as={Link} to="/Facemark">Facemark</Nav.Link>
-          <Nav.Link as={Link} to="/ImgRec">ImgRec</Nav.Link>
-          <Nav.Link as={Link} to="/CamRec">CamRec</Nav.Link>
-          <Nav.Link as={Link} to="/FastStyle">FastStyle</Nav.Link>
-          <Nav.Link as={Link} to="/TrainVoice">TrainVoice</Nav.Link>
+          <Nav.Link as={Link} to="/Finger">Hand Pose Detection</Nav.Link>
+          <Nav.Link as={Link} to="/ObjectDet">Object Detection</Nav.Link>
+          <Nav.Link as={Link} to="/VoiceDet">Speech Recognition</Nav.Link>
+          {/* <Nav.Link as={Link} to="/Facemark">Facemark</Nav.Link> */}
+          <Nav.Link as={Link} to="/ImgRec">Image Recognition</Nav.Link>
+          <Nav.Link as={Link} to="/CamRec">Custom Object Detection</Nav.Link>
+          <Nav.Link as={Link} to="/FastStyle">Arbitrary Style Transfer</Nav.Link>
+          {/* <Nav.Link as={Link} to="/TrainVoice">TrainVoice</Nav.Link> */}
 
         </Nav>
       </Navbar.Collapse>

@@ -27,11 +27,11 @@ const App = () => {
           <Route path="/Finger" element={<Finger/>} />
           <Route path="/ObjectDet" element={<ObjectDet/>} />
           <Route path="/VoiceDet" element={<VoiceDet/>} />
-          <Route path="/Facemark" element={<Facemark/>} />
+          {/* <Route path="/Facemark" element={<Facemark/>} /> */}
           <Route path="/ImgRec" element={<ImgRec/>} />
           <Route path="/CamRec" element={<CamRec/>} />
           <Route path="/FastStyle" element={<FastStyle/>} />
-          <Route path="/TrainVoice" element={<TrainVoice/>} />
+          {/* <Route path="/TrainVoice" element={<TrainVoice/>} /> */}
 
 
         </Routes>
