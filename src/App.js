@@ -33,7 +33,7 @@ const App = () => {
             <Route path="/FastStyle" element={<FastStyle/>} />
           </Routes>
         </Container>
-        <footer style={{ backgroundColor: '#f8f9fa', padding: '10px 0', marginTop: 'auto', zIndex: '1000' }}>
+        <footer style={{ backgroundColor: '#f8f9fa', padding: '10px 0', marginTop: 'auto'}}>
           <Container>
             <div className="row">
               <div className="col-md-6">
