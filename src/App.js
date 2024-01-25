@@ -20,37 +20,36 @@ import TrainVoice from './TrainVoice';
 const App = () => {
   return (
     <Router>
-      <Container>
-        <Navigation />
-        <Routes>
-          <Route path="/Help" exact element={<Help/>} />
-          <Route path="/Finger" element={<Finger/>} />
-          <Route path="/ObjectDet" element={<ObjectDet/>} />
-          <Route path="/VoiceDet" element={<VoiceDet/>} />
-          {/* <Route path="/Facemark" element={<Facemark/>} /> */}
-          <Route path="/ImgRec" element={<ImgRec/>} />
-          <Route path="/CamRec" element={<CamRec/>} />
-          <Route path="/FastStyle" element={<FastStyle/>} />
-          {/* <Route path="/TrainVoice" element={<TrainVoice/>} /> */}
-
-
-        </Routes>
-      </Container>
-      <footer className="footer mt-auto py-3 bg-light">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <img src={require('./PP_logo.png')} alt="PP Logo" style={{ maxWidth: '150px', maxHeight: '150px' }}/>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Container style={{ flex: '1', paddingBottom: '60px' }}>
+          <Navigation />
+          <Routes>
+            <Route path="/Help" exact element={<Help/>} />
+            <Route path="/Finger" element={<Finger/>} />
+            <Route path="/ObjectDet" element={<ObjectDet/>} />
+            <Route path="/VoiceDet" element={<VoiceDet/>} />
+            <Route path="/ImgRec" element={<ImgRec/>} />
+            <Route path="/CamRec" element={<CamRec/>} />
+            <Route path="/FastStyle" element={<FastStyle/>} />
+          </Routes>
+        </Container>
+        <footer style={{ backgroundColor: '#f8f9fa', padding: '10px 0', marginTop: 'auto', zIndex: '1000' }}>
+          <Container>
+            <div className="row">
+              <div className="col-md-6">
+                <img src={require('./PP_logo.png')} alt="PP Logo" style={{ maxWidth: '150px', maxHeight: '150px' }} />
+              </div>
+              <div className="col-md-6 text-md-right">
+                <p>Authors: Maciej Mak, Przemysław Łabuń</p>
+                <p>Promoter: Dr Eng. Damian Cetnarowicz</p>
+              </div>
             </div>
-            <div className="col-md-6 text-md-right">
-              <p>Authors: Maciej Mak, Przemysław Łabuń</p>
-              <p>Promoter: Dr. Eng. Damian Cetnarowicz</p>
-            </div>
-          </div>
-        </div>
-      </footer>
+          </Container>
+        </footer>
+      </div>
     </Router>
   );
 };
+
 
 export default App;
