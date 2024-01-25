@@ -36,6 +36,19 @@ const App = () => {
 
         </Routes>
       </Container>
+      <footer className="footer mt-auto py-3 bg-light">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <img src={require('./PP_logo.png')} alt="PP Logo" style={{ maxWidth: '150px', maxHeight: '150px' }}/>
+            </div>
+            <div className="col-md-6 text-md-right">
+              <p>Authors: Maciej Mak, Przemysław Łabuń</p>
+              <p>Promoter: Dr. Eng. Damian Cetnarowicz</p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </Router>
   );
 };
