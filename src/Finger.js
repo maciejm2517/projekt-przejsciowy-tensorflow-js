@@ -161,19 +161,19 @@ function Finger() {
   return (
     <Container>
       <Row>
-        <Col style={{ position: 'relative' }} xs={8} sm={8} md={8} lg={6} xl={6}>
+        <Col style={{ position: 'relative', paddingBottom: '0px'}} xs={12} sm={12} md={8} lg={6} xl={6}>
           <Webcam
             ref={webcamRef}
-            style={{ position: 'absolute', top: 0, left: 0, width: "100%", objectPosition: 'top' }}
+            style={{ position: 'relative', top: 0, left: 0, width: "100%", objectPosition: 'top' }}
 
           />
           <canvas
             ref={canvasRef}
-            style={{ position: 'absolute', top: 0, left: 0, width: "100%", objectPosition: 'center' }}
+            style={{ position: 'absolute', top: 0, left: 0, width: "100%", objectPosition: 'top', zIndex: 1 }}
           />
 
         </Col>
-        <Col style={{ position: 'relative' }} xs={4} sm={4} md={4} lg={6} xl={6}>
+        <Col style={{ position: 'relative', paddingBottom: '100px' }} xs={8} sm={8} md={4} lg={6} xl={6}>
           {image !== null ? (
             <img
               src={images[image]}

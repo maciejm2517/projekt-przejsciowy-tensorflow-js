@@ -43,10 +43,10 @@ const App = () => {
         <Footer>
         <Container style={{ flex: '1' }}>
             <Row>
-              <Col md={6}>
+              <Col xs={12} sm={12} md={8} lg={6} xl={6}>
                 <img src={require('./PP_logo.png')} alt="PP Logo" style={{ width: '10%' }} />
               </Col>
-              <Col md={6}>
+              <Col xs={12} sm={12} md={8} lg={6} xl={6}>
                 <p>Authors: Maciej Mak, Przemysław Łabuń</p>
                 <p>Promoter: Dr Eng. Damian Cetnarowicz</p>
               </Col>
