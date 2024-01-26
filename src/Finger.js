@@ -173,7 +173,7 @@ function Finger() {
           />
 
         </Col>
-        <Col style={{ position: 'relative', paddingBottom: '100px' }} xs={8} sm={8} md={4} lg={6} xl={6}>
+        <Col style={{ position: 'relative', paddingBottom: '100px' }} xs={12} sm={12} md={4} lg={6} xl={6}>
           {image !== null ? (
             <img
               src={images[image]}
