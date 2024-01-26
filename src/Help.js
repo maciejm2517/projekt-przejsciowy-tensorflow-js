@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Help = () => {
   return (
-    <div className='row'>
+    <div className='row' style={{ marginBottom: '150px' }}>
       <div className='col'>
       <h1>Select one of the models at the top to evaluate it. Available modules are:</h1>
       <h2>Hand Pose Detection</h2>
