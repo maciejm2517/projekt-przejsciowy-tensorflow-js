@@ -256,7 +256,11 @@ if(model) return (
 <Container>
 <Row>
   <Col style={{ position: 'relative' }} xs={10} sm={10} md={10} lg={6} xl={6}>
-  <button onClick={recognizeCommands}>Start</button>{action ? action : "No Action Detected"}
+  <button onClick={recognizeCommands}>Start</button>
+  <p>
+  {action ? action : "No Action Detected"}
+
+  </p>
 
   </Col>
   <Col style={{ position: 'relative' }}>

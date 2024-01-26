@@ -5,6 +5,7 @@ import {Container} from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Help from './Help';
 import Navigation from './Navbar';
+import styled from 'styled-components';
 
 import Finger from './Finger';
 import ObjectDet from './ObjectDet';
@@ -15,7 +16,14 @@ import CamRec from './CamRec';
 import FastStyle from './FastStyle';
 import TrainVoice from './TrainVoice';
 
-
+const Footer = styled.footer`
+  background-color: #333;
+  padding: 10px;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+`;
 
 const App = () => {
   return (
@@ -33,11 +41,11 @@ const App = () => {
             <Route path="/FastStyle" element={<FastStyle/>} />
           </Routes>
         </Container>
-        <footer style={{ backgroundColor: '#f8f9fa', padding: '10px 0', marginTop: 'auto'}}>
+        <Footer>
           <Container>
             <div className="row">
               <div className="col-md-6">
-                <img src={require('./PP_logo.png')} alt="PP Logo" style={{ maxWidth: '150px', maxHeight: '150px' }} />
+                <img src={require('./PP_logo.png')} alt="PP Logo" style={{ width: '5%', }} />
               </div>
               <div className="col-md-6 text-md-right">
                 <p>Authors: Maciej Mak, Przemysław Łabuń</p>
@@ -45,7 +53,7 @@ const App = () => {
               </div>
             </div>
           </Container>
-        </footer>
+          </Footer>
       </div>
     </Router>
   );
