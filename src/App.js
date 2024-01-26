@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Help from './Help';
@@ -17,8 +17,8 @@ import FastStyle from './FastStyle';
 import TrainVoice from './TrainVoice';
 
 const Footer = styled.footer`
-  background-color: #333;
-  padding: 10px;
+  background-color: #858585;
+  padding: 5px;
   color: white;
   position: fixed;
   bottom: 0;
@@ -28,7 +28,6 @@ const Footer = styled.footer`
 const App = () => {
   return (
     <Router>
-        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Container style={{ flex: '1', paddingBottom: '60px' }}>
           <Navigation />
           <Routes>
@@ -42,19 +41,18 @@ const App = () => {
           </Routes>
         </Container>
         <Footer>
-          <Container>
-            <div className="row">
-              <div className="col-md-6">
-                <img src={require('./PP_logo.png')} alt="PP Logo" style={{ width: '5%', }} />
-              </div>
-              <div className="col-md-6 text-md-right">
+        <Container style={{ flex: '1' }}>
+            <Row>
+              <Col md={6}>
+                <img src={require('./PP_logo.png')} alt="PP Logo" style={{ width: '10%' }} />
+              </Col>
+              <Col md={6}>
                 <p>Authors: Maciej Mak, Przemysław Łabuń</p>
                 <p>Promoter: Dr Eng. Damian Cetnarowicz</p>
-              </div>
-            </div>
+              </Col>
+            </Row>
           </Container>
           </Footer>
-      </div>
     </Router>
   );
 };
