@@ -19,7 +19,7 @@ function FastStyle() {
     const textInputStyledRef = useRef()
     const fileStyledInputRef = useRef()
 
-    const MODEL_PATH = 'http://' + window.location.hostname + ':3004/fast_style/model.json';
+    const MODEL_PATH = 'http://' + window.location.hostname + ':3004/arbiratyStyleTransfer/model.json';
     //http-server -p 3004 --cors 
 
     const loadModel = async () => {

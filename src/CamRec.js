@@ -18,13 +18,14 @@ function CamRec() {
   const [variable, setVariable] = useState('');
 
   const images = { thumbs_up: thumbs_up, victory: victory, i_love_you: i_love_you, thumbs_down: thumbs_down };
+  const MODEL_PATH = 'http://' + window.location.hostname + ':3004/mobileNet/model.json';
 
   // Main function
   const runCoco = async () => {
     // 3. TODO - Load network 
     console.time('Execution Time');
 
-    const net = await tf.loadGraphModel('http://localhost:3004/cam_rec/model.json')
+    const net = await tf.loadGraphModel(MODEL_PATH)
     console.timeEnd('Execution Time');
 
     //console.log("detecting");
