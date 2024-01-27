@@ -1,15 +1,23 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/exhaustive-deps */
 // Import dependencies
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 import Webcam from "react-webcam";
 import "./App.css";
 // 2. TODO - Import drawing utility here
 import { Container, Row, Col } from 'react-bootstrap';
-
+import victory from "./handImgs/victory_2.jpg";
+import thumbs_up from "./handImgs/thumbs_up_2.jpg";
+import thumbs_down from "./handImgs/thumbs_down_2.jpg";
+import i_love_you from "./handImgs/i_love_you_2.jpg";
 function CamRec() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+  const [image, setImage] = useState(null);
+  const [variable, setVariable] = useState('');
+
+  const images = { thumbs_up: thumbs_up, victory: victory, i_love_you: i_love_you, thumbs_down: thumbs_down };
 
   // Main function
   const runCoco = async () => {
@@ -44,6 +52,23 @@ function CamRec() {
             ctx.fillStyle = 'white'
             ctx.font = '30px Arial'         
             
+            setImage(labelMap[text]['name'])
+            if (labelMap[text]['name'] === "victory") {
+              const myVariable = "victory";
+              setVariable(myVariable);
+            }
+            if (labelMap[text]['name'] === "thumbs_up") {
+              const myVariable = "thumbs up";
+              setVariable(myVariable);
+            }
+            if (labelMap[text]['name'] === "i_love_you") {
+              const myVariable = "i love you";
+              setVariable(myVariable);
+            }
+            if (labelMap[text]['name'] === "thumbs_down") {
+              const myVariable = "thumbs down";
+              setVariable(myVariable);
+            }
             // DRAW!!
             ctx.beginPath()
             ctx.fillText(labelMap[text]['name'] + ' - ' + Math.round(scores[i]*100)/100, x*imgWidth, y*imgHeight-10)
@@ -111,25 +136,37 @@ function CamRec() {
   return (
     <Container>
       <Row>
-        <Col style={{ position: 'relative' }} xs={10} sm={10} md={10} lg={6} xl={6}>
+        <Col style={{ position: 'relative', paddingBottom: '0px'}} xs={12} sm={12} md={8} lg={6} xl={6}>
           <Webcam
             ref={webcamRef}
-            style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'top' }}
+            style={{ position: 'relative', top: 0, left: 0, width: "100%", objectPosition: 'top' }}
 
           />
-
           <canvas
             ref={canvasRef}
-            style={{ position: 'absolute', top: 0, left: 0, width:"100%", objectPosition: 'center'  }}
-
+            style={{ position: 'absolute', top: 0, left: 0, width: "100%", objectPosition: 'top', zIndex: 1 }}
           />
+
         </Col>
-        <Col style={{ position: 'relative' }}>
-        
+        <Col style={{ position: 'relative', paddingBottom: '100px' }} xs={12} sm={12} md={4} lg={6} xl={6}>
+          {image !== null ? (
+            <img
+              src={images[image]}
+              style={{
+                width: "50%",
+                alt: {image}
+              }}
+            />
+          ) : (
+            true
 
-      </Col>
+          )}
+          <p>
+            {variable}
+          </p>
+
+        </Col>
       </Row>
-
     </Container>
   );
 }
