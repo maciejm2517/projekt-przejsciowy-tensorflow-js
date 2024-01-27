@@ -17,7 +17,7 @@ function CamRec() {
     // 3. TODO - Load network 
     console.time('Execution Time');
 
-    const net = await tf.loadGraphModel('http://' + window.location.hostname + ':3004/cam_rec/model.json')
+    const net = await tf.loadGraphModel('http://localhost:3004/cam_rec/model.json')
     console.timeEnd('Execution Time');
 
     //console.log("detecting");

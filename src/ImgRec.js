@@ -13,7 +13,7 @@ function ImgRec() {
     const textInputRef = useRef()
     const fileInputRef = useRef()
 
-    const MODEL_PATH = 'http://' + window.location.hostname + ':3004/tfjs_model/model.json';
+    const MODEL_PATH = 'http://localhost:3004/tfjs_model/model.json';
     const CLASSES = ['i love you', 'thumb down', 'thumb up', 'victory',]
     //http-server -p 3004 --cors 
 

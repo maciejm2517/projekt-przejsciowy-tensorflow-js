@@ -17,10 +17,10 @@ import FastStyle from './FastStyle';
 import TrainVoice from './TrainVoice';
 
 const Footer = styled.footer`
-  background-color: #858585;
+  background-color: #F8F9FA;
   padding: 5px;
   color: white;
-  position: fixed;
+  position: fixed; 
   bottom: 0;
   width: 100%;
 `;
@@ -44,11 +44,8 @@ const App = () => {
         <Container style={{ flex: '1' }}>
             <Row>
               <Col xs={12} sm={12} md={8} lg={6} xl={6}>
-                <img src={require('./PP_logo.png')} alt="PP Logo" style={{ width: '10%' }} />
-              </Col>
-              <Col xs={12} sm={12} md={8} lg={6} xl={6}>
-                <p>Authors: Maciej Mak, Przemysław Łabuń</p>
-                <p>Promoter: Dr Eng. Damian Cetnarowicz</p>
+                <img src={require('./PP_logo.png')} alt="PP Logo" style={{ width: '8%', float: 'left', paddingRight: '10px'}} />
+                <p style={{color: 'black'}}>Authors: Maciej Mak, Przemysław Łabuń<br/>Promoter: Dr Eng. Damian Cetnarowicz</p>
               </Col>
             </Row>
           </Container>
