@@ -13,11 +13,9 @@ const Navigation = () => {
           <Nav.Link as={Link} to="/Finger">Hand Pose Detection</Nav.Link>
           <Nav.Link as={Link} to="/ObjectDet">Object Detection</Nav.Link>
           <Nav.Link as={Link} to="/VoiceDet">Speech Recognition</Nav.Link>
-          {/* <Nav.Link as={Link} to="/Facemark">Facemark</Nav.Link> */}
           <Nav.Link as={Link} to="/ImgRec">Image Recognition</Nav.Link>
           <Nav.Link as={Link} to="/CamRec">Custom Object Detection</Nav.Link>
           <Nav.Link as={Link} to="/FastStyle">Arbitrary Style Transfer</Nav.Link>
-          {/* <Nav.Link as={Link} to="/TrainVoice">TrainVoice</Nav.Link> */}
 
         </Nav>
       </Navbar.Collapse>

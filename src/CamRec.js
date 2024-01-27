@@ -1,12 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Import dependencies
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 import Webcam from "react-webcam";
 import "./App.css";
-import { nextFrame } from "@tensorflow/tfjs";
 // 2. TODO - Import drawing utility here
-import { drawRect } from "./utilities_cam_rec";
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 function CamRec() {
   const webcamRef = useRef(null);
@@ -26,6 +25,33 @@ function CamRec() {
       detect(net);
     }, 10);
   };
+  const labelMap = {
+    1:{name:'i_love_you', color:'red'},
+    2:{name:'thumb_down', color:'yellow'},
+    3:{name:'thumb_up', color:'lime'},
+    4:{name:'victory', color:'blue'},
+}
+  const drawRect = (boxes, classes, scores, threshold, imgWidth, imgHeight, ctx)=>{
+    for(let i=0; i<=boxes.length; i++){
+        if(boxes[i] && classes[i] && scores[i]>threshold){
+            // Extract variables
+            const [y,x,height,width] = boxes[i]
+            const text = classes[i]
+            
+            // Set styling
+            ctx.strokeStyle = labelMap[text]['color']
+            ctx.lineWidth = 10
+            ctx.fillStyle = 'white'
+            ctx.font = '30px Arial'         
+            
+            // DRAW!!
+            ctx.beginPath()
+            ctx.fillText(labelMap[text]['name'] + ' - ' + Math.round(scores[i]*100)/100, x*imgWidth, y*imgHeight-10)
+            ctx.rect(x*imgWidth, y*imgHeight, width*imgWidth/2, height*imgHeight/2);
+            ctx.stroke()
+        }
+    }
+}
 
   const detect = async (net) => {
     // Check data is available

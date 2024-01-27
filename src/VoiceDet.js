@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/alt-text */
 // import React, {useRef, useEffect, useState } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
@@ -144,12 +146,10 @@
 // export default VoiceDet;
 
 
-import React, {useRef, useEffect, useState } from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import * as tf from "@tensorflow/tfjs";
 import * as speech from "@tensorflow-models/speech-commands";
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 
 
@@ -178,9 +178,6 @@ function VoiceDet() {
   const [action, setAction] = useState(null);
   const [labels, setLabels] = useState(null);
 
-  const [picture, setPicture] = useState(null);
-
-  const canvasRef = useRef(null);
   const images = {  zero: zero,
                     one: one,
                     two: two,

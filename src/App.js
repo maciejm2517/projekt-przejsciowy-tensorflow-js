@@ -10,11 +10,9 @@ import styled from 'styled-components';
 import Finger from './Finger';
 import ObjectDet from './ObjectDet';
 import VoiceDet from './VoiceDet';
-import Facemark from './Facemark';
 import ImgRec from './ImgRec';
 import CamRec from './CamRec';
 import FastStyle from './FastStyle';
-import TrainVoice from './TrainVoice';
 
 const Footer = styled.footer`
   background-color: #F8F9FA;
