@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Row, Col} from 'react-bootstrap';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Help from './Help';
 import Navigation from './Navbar';
 import styled from 'styled-components';
@@ -31,7 +31,8 @@ const App = () => {
         <Container style={{ flex: '1', paddingBottom: '60px' }}>
           <Navigation />
           <Routes>
-            <Route path="/Help" exact element={<Help/>} />
+            <Route path="/" element={<Navigate to="/Help" />} /> {/* Redirect to Help by default */}
+            <Route path="/Help" element={<Help/>} />
             <Route path="/Finger" element={<Finger/>} />
             <Route path="/ObjectDet" element={<ObjectDet/>} />
             <Route path="/VoiceDet" element={<VoiceDet/>} />
