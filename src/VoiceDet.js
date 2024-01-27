@@ -130,8 +130,8 @@ function VoiceDet() {
       </Row>
       <Row>
         <Col style={{ position: 'relative' }} xs={10} sm={10} md={10} lg={6} xl={6}>
-          <Button onClick={recognizeCommands}>Start</Button>
-          <p>
+          <Button style={{backgroundColor: 'black', fontSize: 'large'}} onClick={recognizeCommands}>Start</Button>
+          <p style={{  fontWeight: 'bold', fontSize: 'large'}}>
             {action ? action : "No Action Detected"}
           </p>
           <img
