@@ -39,8 +39,18 @@ const App = () => {
             <Route path="/CamRec" element={<CamRec/>} />
             <Route path="/FastStyle" element={<FastStyle/>} />
           </Routes>
+          <Footer>
+        {/* <Container style={{ flex: '1' }}> */}
+            <Row>
+              <Col xs={12} sm={12} md={8} lg={6} xl={6}>
+                <img src={require('./PP_logo.png')} alt="PP Logo" style={{ width: '8%', float: 'left', paddingRight: '10px'}} />
+                <p style={{color: 'black'}}>Authors: Maciej Mak, Przemysław Łabuń<br/>Promoter: Dr Eng. Damian Cetnarowicz</p>
+              </Col>
+            </Row>
+          {/* </Container> */}
+          </Footer>
         </Container>
-        <Footer>
+        {/* <Footer>
         <Container style={{ flex: '1' }}>
             <Row>
               <Col xs={12} sm={12} md={8} lg={6} xl={6}>
@@ -49,7 +59,7 @@ const App = () => {
               </Col>
             </Row>
           </Container>
-          </Footer>
+          </Footer> */}
     </Router>
   );
 };
