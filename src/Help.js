@@ -22,6 +22,8 @@ const Help = () => {
         <li>Kite</li>
         <li>Car</li>
       </ul>
+       <a href="https://github.com/tensorflow/tfjs-models/blob/master/coco-ssd/src/classes.ts">List of all classes in COCO dataset</a>
+
       <h2>Speech Recognition</h2>
       Model recognizing 18 possible commands in english language spoken into the microphone. To start listening press "start" button. Possible commands:
       <ul>
