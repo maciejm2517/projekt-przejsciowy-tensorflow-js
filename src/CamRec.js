@@ -8,8 +8,8 @@ import "./App.css";
 // 2. TODO - Import drawing utility here
 import { Container, Row, Col } from 'react-bootstrap';
 import victory from "./handImgs/victory_2.jpg";
-import thumbs_up from "./handImgs/thumbs_up_2.jpg";
-import thumbs_down from "./handImgs/thumbs_down_2.jpg";
+import thumb_up from "./handImgs/thumbs_up_2.jpg";
+import thumb_down from "./handImgs/thumbs_down_2.jpg";
 import i_love_you from "./handImgs/i_love_you_2.jpg";
 function CamRec() {
   const webcamRef = useRef(null);
@@ -17,7 +17,7 @@ function CamRec() {
   const [image, setImage] = useState(null);
   const [variable, setVariable] = useState('');
 
-  const images = { thumb_up: thumbs_up, victory: victory, i_love_you: i_love_you, thumb_down: thumbs_down };
+  const images = { thumb_up: thumb_up, victory: victory, i_love_you: i_love_you, thumb_down: thumb_down };
   const MODEL_PATH= process.env.PUBLIC_URL + 'server/mobileNet/model.json'
 
 
