@@ -18,7 +18,8 @@ function CamRec() {
   const [variable, setVariable] = useState('');
 
   const images = { thumbs_up: thumbs_up, victory: victory, i_love_you: i_love_you, thumbs_down: thumbs_down };
-  const MODEL_PATH = 'http://' + window.location.hostname + ':3004/mobileNet/model.json';
+  const MODEL_PATH= process.env.PUBLIC_URL + 'server/mobileNet/model.json'
+
 
   // Main function
   const runCoco = async () => {
