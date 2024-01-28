@@ -17,7 +17,7 @@ function CamRec() {
   const [image, setImage] = useState(null);
   const [variable, setVariable] = useState('');
 
-  const images = { thumbs_up: thumbs_up, victory: victory, i_love_you: i_love_you, thumbs_down: thumbs_down };
+  const images = { thumb_up: thumbs_up, victory: victory, i_love_you: i_love_you, thumb_down: thumbs_down };
   const MODEL_PATH= process.env.PUBLIC_URL + 'server/mobileNet/model.json'
 
 
@@ -59,7 +59,7 @@ function CamRec() {
               const myVariable = "victory";
               setVariable(myVariable);
             }
-            if (labelMap[text]['name'] === "thumbs_up") {
+            if (labelMap[text]['name'] === "thumb_up") {
               const myVariable = "thumbs up";
               setVariable(myVariable);
             }
@@ -67,7 +67,7 @@ function CamRec() {
               const myVariable = "i love you";
               setVariable(myVariable);
             }
-            if (labelMap[text]['name'] === "thumbs_down") {
+            if (labelMap[text]['name'] === "thumb_down") {
               const myVariable = "thumbs down";
               setVariable(myVariable);
             }
