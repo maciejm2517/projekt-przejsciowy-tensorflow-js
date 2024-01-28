@@ -1,30 +1,27 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import * as speech from "@tensorflow-models/speech-commands";
+import * as speechCommands from "@tensorflow-models/speech-commands";
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
-
-
-import zero from "./VD_imgs/zero.png";
-import one from "./VD_imgs/number-one.png";
-import two from "./VD_imgs/number-2.png";
-import three from "./VD_imgs/number-3.png";
-import four from "./VD_imgs/number-four.png";
-import five from "./VD_imgs/number-5.png";
-import six from "./VD_imgs/six.png";
-import seven from "./VD_imgs/seven.png";
-import eight from "./VD_imgs/number-8.png";
-import nine from "./VD_imgs/number-9.png";
-import yes from "./VD_imgs/thumb-up.png";
-import no from "./VD_imgs/thumb-down.png";
-import left from "./VD_imgs/plain-arrow-left.png";
-import right from "./VD_imgs/plain-arrow-right.png";
-import up from "./VD_imgs/plain-arrow-up.png";
-import down from "./VD_imgs/plain-arrow-down.png";
-import go from "./VD_imgs/play-button.png";
-import stop from "./VD_imgs/stop-sign.png";
-
+import zeroImg from "./VD_imgs/zero.png";
+import oneImg from "./VD_imgs/number-one.png";
+import twoImg from "./VD_imgs/number-2.png";
+import threeImg from "./VD_imgs/number-3.png";
+import fourImg from "./VD_imgs/number-four.png";
+import fiveImg from "./VD_imgs/number-5.png";
+import sixImg from "./VD_imgs/six.png";
+import sevenImg from "./VD_imgs/seven.png";
+import eightImg from "./VD_imgs/number-8.png";
+import nineImg from "./VD_imgs/number-9.png";
+import yesImg from "./VD_imgs/thumb-up.png";
+import noImg from "./VD_imgs/thumb-down.png";
+import leftImg from "./VD_imgs/plain-arrow-left.png";
+import rightImg from "./VD_imgs/plain-arrow-right.png";
+import upImg from "./VD_imgs/plain-arrow-up.png";
+import downImg from "./VD_imgs/plain-arrow-down.png";
+import goImg from "./VD_imgs/play-button.png";
+import stopImg from "./VD_imgs/stop-sign.png";
 
 function VoiceDet() {
   const [model, setModel] = useState(null);
@@ -32,28 +29,28 @@ function VoiceDet() {
   const [labels, setLabels] = useState(null);
 
   const images = {
-    zero: zero,
-    one: one,
-    two: two,
-    three: three,
-    four: four,
-    five: five,
-    six: six,
-    seven: seven,
-    eight: eight,
-    nine: nine,
-    yes: yes,
-    no: no,
-    left: left,
-    right: right,
-    up: up,
-    down: down,
-    go: go,
-    stop: stop
+    zero: zeroImg,
+    one: oneImg,
+    two: twoImg,
+    three: threeImg,
+    four: fourImg,
+    five: fiveImg,
+    six: sixImg,
+    seven: sevenImg,
+    eight: eightImg,
+    nine: nineImg,
+    yes: yesImg,
+    no: noImg,
+    left: leftImg,
+    right: rightImg,
+    up: upImg,
+    down: downImg,
+    go: goImg,
+    stop: stopImg
   };
 
   const loadModel = async () => {
-    const recognizer = await speech.create("BROWSER_FFT");
+    const recognizer = await speechCommands.create("BROWSER_FFT");
     await recognizer.ensureModelLoaded();
     setModel(recognizer);
     setLabels(recognizer.wordLabels());
@@ -73,9 +70,8 @@ function VoiceDet() {
 
     if (model && !model.isListening()) {
       model.listen(result => {
-        console.log(result.spectrogram);
         setAction(labels[argMax(Object.values(result.scores))]);
-      }, { includeSpectrogram: true, probabilityThreshold: 0.9 });
+      }, { includeSpectrogram: false, probabilityThreshold: 0.9 });
       setTimeout(() => {
         if (model.isListening()) {
           model.stopListening();
@@ -85,7 +81,6 @@ function VoiceDet() {
   };
 
   if (model) return (
-
     <Container>
       <Row>
         <h1>
@@ -144,10 +139,8 @@ function VoiceDet() {
               width: 250
             }}
           />
-
         </Col>
       </Row>
-
     </Container>
   );
 }

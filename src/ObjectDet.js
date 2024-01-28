@@ -23,7 +23,6 @@ function ObjectDet() {
 
       ctx.strokeStyle =  colorMap[text]
       ctx.font = '20px Arial';
-      console.log(colorMap)
       ctx.beginPath();   
       ctx.fillStyle =  colorMap[text]
       ctx.fillText(text+" "+Math.round(score * 100) / 100, x, y);
@@ -33,12 +32,8 @@ function ObjectDet() {
     });
   }
 
-  const runCoco = async () => {
-    console.time('Execution Time');
-
+  const runInterference = async () => {
     const net = await cocossd.load();
-    console.timeEnd('Execution Time');
-
     console.log("Object detection model loaded.");
     setInterval(() => {
       detect(net);
@@ -60,10 +55,8 @@ function ObjectDet() {
 
       canvasRef.current.width = videoWidth;
       canvasRef.current.height = videoHeight;
-      console.time('Execution Time');
 
       const obj = await net.detect(video);
-      console.timeEnd('Execution Time');
 
       if (canvasRef.current != null) {
 
@@ -73,7 +66,7 @@ function ObjectDet() {
     }
   };
 
-  useEffect(() => { runCoco() }, []);
+  useEffect(() => { runInterference() }, []);
 
   return (
     <Container>
@@ -82,23 +75,16 @@ function ObjectDet() {
           <Webcam
             ref={webcamRef}
             style={{ position: 'absolute', top: 0, left: 0, width: "100%", objectPosition: 'top' }}
-
           />
-
           <canvas
             ref={canvasRef}
             style={{ position: 'absolute', top: 0, left: 0, width: "100%", objectPosition: 'center' }}
-
           />
         </Col>
         <Col style={{ position: 'relative' }}>
-
-
         </Col>
       </Row>
-
     </Container>
-
   );
 }
 
